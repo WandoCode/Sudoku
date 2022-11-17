@@ -26,7 +26,6 @@ function rowFactory(cellDatas) {
     const cellData = cellDatas.find((cell) => {
       return cell.position.x === posX && cell.position.y === posY
     })
-    console.log(cellData)
     return cellData.value
   }
 
