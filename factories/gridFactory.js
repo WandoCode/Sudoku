@@ -1,7 +1,8 @@
 import rowFactory from './rowFactory'
 
-function gridFactory() {
-  const rowGenerator = rowFactory()
+function gridFactory(cellDatas) {
+  const rowGenerator = rowFactory(cellDatas)
+
   const createBoard = () => {
     const table = document.createElement('table')
     table.classList.add('board')
