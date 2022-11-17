@@ -1,6 +1,6 @@
-import rowFactory from './rowFactory'
+import rowFactory from './rowDOMFactory'
 
-function gridFactory(cellDatas) {
+function gridDOMFactory(cellDatas) {
   const rowGenerator = rowFactory(cellDatas)
 
   const createBoard = () => {
@@ -18,4 +18,4 @@ function gridFactory(cellDatas) {
   return { createBoard }
 }
 
-export default gridFactory
+export default gridDOMFactory

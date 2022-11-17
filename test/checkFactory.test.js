@@ -151,7 +151,7 @@ describe('When I call the checkSquare method with valid values', () => {
 
     // Those 2 positions in gridDatas are the positions (x:0,y:0) and (x:1,y:1)
     gridDatasCopy[0].value = 1
-    gridDatasCopy[1].value = 1
+    gridDatasCopy[11].value = 1
 
     test('Then the it should be return false', () => {
       const checkFactoryInstance = checkFactory(gridDatasCopy)

@@ -1,4 +1,4 @@
-function rowFactory(cellDatas) {
+function rowDOMFactory(cellDatas) {
   const createRow = (posY) => {
     const row = document.createElement('tr')
     row.classList.add('board')
@@ -32,4 +32,4 @@ function rowFactory(cellDatas) {
   return { createRow }
 }
 
-export default rowFactory
+export default rowDOMFactory

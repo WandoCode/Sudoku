@@ -2,30 +2,30 @@
  * @vitest-environment jsdom
  */
 import { describe, expect, test } from 'vitest'
-import gridFactory from '../factories/gridFactory'
+import gridDOMFactory from '../factories/gridDOMFactory'
 import gridDatas from '../mock/_grid.json'
 
-describe('When I call a gridFactory instance', () => {
+describe('When I call a gridDOMFactory instance', () => {
   test('Then it should have a "createBorad" method', () => {
-    const gridFactoryInstance = gridFactory(gridDatas)
+    const gridDOMFactoryInstance = gridDOMFactory(gridDatas)
 
-    expect(Object.getOwnPropertyNames(gridFactoryInstance)).toContain(
+    expect(Object.getOwnPropertyNames(gridDOMFactoryInstance)).toContain(
       'createBoard'
     )
   })
 })
 
-describe('When I call a gridFactory.createboard', () => {
+describe('When I call a gridDOMFactory.createboard', () => {
   test('Then it should return a "table" DOM element', () => {
-    const gridFactoryInstance = gridFactory(gridDatas)
-    const table = gridFactoryInstance.createBoard()
+    const gridDOMFactoryInstance = gridDOMFactory(gridDatas)
+    const table = gridDOMFactoryInstance.createBoard()
 
     expect(table.tagName).toBe('TABLE')
   })
 
   test('Then "table" DOM element should contain 9 rows(TR)', () => {
-    const gridFactoryInstance = gridFactory(gridDatas)
-    const table = gridFactoryInstance.createBoard()
+    const gridDOMFactoryInstance = gridDOMFactory(gridDatas)
+    const table = gridDOMFactoryInstance.createBoard()
 
     table.childNodes.forEach((el) => {
       expect(el.tagName).toBe('TR')
