@@ -1,18 +1,16 @@
-import rowFactory from "./rowFactory"
+import rowFactory from './rowFactory'
 
 function gridFactory() {
-  const rowGenerator =  rowFactory()
+  const rowGenerator = rowFactory()
   const createBoard = () => {
     const table = document.createElement('table')
     table.classList.add('board')
 
-    const tableBody = document.createElement('tbody')
-    table.appendChild(tableBody)
-
-    for(let j=0; j<9; 1++){
-      rowGenerator.createRow(j)
+    for (let j = 0; j < 9; j++) {
+      const newRow = rowGenerator.createRow(j)
+      table.appendChild(newRow)
     }
-    
+
     return table
   }
 
