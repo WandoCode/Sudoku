@@ -1,0 +1,23 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "jest"
+  },
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitest": "^0.25.2",
+    "@testing-library/dom": "^8.19.0",
+    "jsdom": "^20.0.2"
+  },
+  "dependencies": {
+    "vite": "^3.2.4"
+  }
+}
