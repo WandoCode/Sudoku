@@ -71,7 +71,22 @@ function checkFactory(gridDatas) {
     return positions
   }
 
-  return { checkRow, checkColumn, getSquarePosition, checkSquare }
+  /* At a given position, looks if the row, column and square are valid */
+  const gridIsValidAtPos = function (posX, posY) {
+    let gridIsValid = this.checkRow(posY)
+    gridIsValid = gridIsValid ? this.checkColumn(posX) : false
+    gridIsValid = gridIsValid ? this.checkSquare(posX, posY) : false
+
+    return gridIsValid
+  }
+
+  return {
+    checkRow,
+    checkColumn,
+    getSquarePosition,
+    checkSquare,
+    gridIsValidAtPos,
+  }
 }
 
 export default checkFactory

@@ -27,27 +27,8 @@ describe('When I start an instance of datasFactory', () => {
 describe('When I call "createEmptyFullGrid"', () => {
   test('Then it should return an array of 81 element that have a form of a empty cellData', () => {
     const datasFactoryInstance = datasFactory()
-    const emptyGrid = datasFactoryInstance.createEmptyFullGrid()
-
-    expect(Array.isArray(emptyGrid)).toBeTruthy()
-    expect(emptyGrid.length).toEqual(81)
-
-    emptyGrid.forEach((emptyCell) => {
-      expect(emptyCell.value).toBeDefined()
-      expect(emptyCell.value).toBeNull()
-      expect(emptyCell.position.x).toMatch(/[0-9]/)
-      expect(emptyCell.position.y).toMatch(/[0-9]/)
-      expect(emptyCell.canChange).toBeTruthy()
-    })
-  })
-})
-
-describe('When I create an instance of datasFactory and call the "init" method', () => {
-  test('Then it the "grid" propertie should be an array of 81 element that have a form of a empty cellData', () => {
-    const datasFactoryInstance = datasFactory()
-    datasFactoryInstance.init()
+    datasFactoryInstance.createEmptyFullGrid()
     const emptyGrid = datasFactoryInstance.grid
-
     expect(Array.isArray(emptyGrid)).toBeTruthy()
     expect(emptyGrid.length).toEqual(81)
 
@@ -65,7 +46,7 @@ describe('When I create an instance of datasFactory, assign it a grid and call t
   describe('Given the grid is empty', () => {
     test('Then it should return the next available position in the grid', () => {
       const datasFactoryInstance = datasFactory()
-      datasFactoryInstance.init() // Attribute an empty grid to this.grid
+      datasFactoryInstance.createEmptyFullGrid() // Attribute an empty grid to this.grid
 
       const nextEmptyCellPos = datasFactoryInstance.getNextEmptyCellPos(0, 0)
       expect(nextEmptyCellPos).toBeDefined()
