@@ -29,6 +29,7 @@ describe('When I call "createEmptyFullGrid"', () => {
     const datasFactoryInstance = datasFactory()
     datasFactoryInstance.createEmptyFullGrid()
     const emptyGrid = datasFactoryInstance.grid
+
     expect(Array.isArray(emptyGrid)).toBeTruthy()
     expect(emptyGrid.length).toEqual(81)
 
@@ -77,6 +78,50 @@ describe('When I create an instance of datasFactory, assign it a grid and call t
       const nextEmptyCellPos = datasFactoryInstance.getNextEmptyCellPos(0, 0)
       expect(nextEmptyCellPos).toBeDefined()
       expect(nextEmptyCellPos).toEqual({ x: null, y: null })
+    })
+  })
+})
+
+describe('When I call "getRandomFullValidGrid"', () => {
+  test('Then it should return an array of 81 cells that have no null value', () => {
+    const datasFactoryInstance = datasFactory()
+    datasFactoryInstance.getRandomFullValidGrid()
+    const fullGrid = datasFactoryInstance.grid
+
+    expect(Array.isArray(fullGrid)).toBeTruthy()
+    expect(fullGrid.length).toEqual(81)
+
+    fullGrid.forEach((fullCell) => {
+      expect(fullCell.value).toBeDefined()
+      expect(fullCell.value).not.toBeNull()
+    })
+  })
+  // As a 1st estimation that the grid is valid for a sudoku
+  test('Then it should return an array of 81 cells where numbers from 1 to 10 are found exactly 9 times', () => {
+    const datasFactoryInstance = datasFactory()
+    datasFactoryInstance.getRandomFullValidGrid()
+    const fullGrid = datasFactoryInstance.grid
+
+    const rep = {}
+    expect(Array.isArray(fullGrid)).toBeTruthy()
+    expect(fullGrid.length).toEqual(81)
+
+    fullGrid.forEach((fullCell) => {
+      const val = fullCell.value
+      if (!rep[val]) rep[val] = 1
+      else rep[val]++
+    })
+
+    expect(rep).toEqual({
+      1: 9,
+      2: 9,
+      3: 9,
+      4: 9,
+      5: 9,
+      6: 9,
+      7: 9,
+      8: 9,
+      9: 9,
     })
   })
 })
