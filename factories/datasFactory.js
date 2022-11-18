@@ -24,7 +24,7 @@ function datasFactory() {
     // console.log(grid)
   }
 
-  const getNextEmptyCellPos = (currPosX, currPosY) => {
+  const getNextEmptyCellPos = function (currPosX, currPosY) {
     let nextPosX = currPosX
     let nextPosY = currPosY
     while (nextPosX < 9 && nextPosY < 9) {
@@ -33,15 +33,16 @@ function datasFactory() {
         nextPosX = 0
         nextPosY++
 
-        if (nextPosY === 9) return
+        if (nextPosY === 9) break
       }
 
-      const currCell = grid.find(
-        (cell) => cell.position.x === nextPosX && cell.position.x === nextPosY
-      )
+      const currCell = this.grid.find((cell) => {
+        return cell.position.x === nextPosX && cell.position.y === nextPosY
+      })
 
-      if (currCell.value === null) return { nextPosX, nextPosY }
+      if (currCell?.value === null) return { x: nextPosX, y: nextPosY }
     }
+    return { x: null, y: null }
   }
 
   const createEmptyCell = (posX, posY) => {
