@@ -97,7 +97,7 @@ describe('When I call "getRandomFullValidGrid"', () => {
     })
   })
   // As a 1st estimation that the grid is valid for a sudoku
-  test('Then it should return an array of 81 cells where numbers from 1 to 10 are found exactly 9 times', () => {
+  test('Then it should return an array of 81 cells where numbers from 1 to 9 are found exactly 9 times', () => {
     const datasFactoryInstance = datasFactory()
     datasFactoryInstance.getRandomFullValidGrid()
     const fullGrid = datasFactoryInstance.grid
