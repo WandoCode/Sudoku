@@ -14,14 +14,14 @@ function gameManager() {
     gridCurrState,
     gridSolution,
     id,
-    launchNewGame: function () {
+    launchNewGame: function (difficulty) {
       const datasMaker = datasFactory()
 
       datasMaker.getRandomFullValidGrid()
 
       this.gridSolution = datasMaker.getGrid()
 
-      datasMaker.makeGridPlayable('easy')
+      datasMaker.makeGridPlayable(difficulty)
 
       this.gridCurrState = datasMaker.getGrid()
 
