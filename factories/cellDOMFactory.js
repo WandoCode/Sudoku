@@ -24,7 +24,7 @@ function cellDOMFactory(cellData, posX, posY) {
     addAttribute: function () {
       this.cellDOM.setAttribute('data-pos-x', posX)
       this.cellDOM.setAttribute('data-pos-y', posY)
-      this.cellDOM.setAttribute('canChange', cellData.canChange)
+      this.cellDOM.setAttribute('data-canChange', cellData.canChange)
     },
   }
 }
