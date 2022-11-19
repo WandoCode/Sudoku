@@ -14,7 +14,7 @@ function cellDOMFactory(cellData, posX, posY) {
 
     addCellClasses: function () {
       let cellClassesArr = ['board__cell']
-      if (cellData.value) {
+      if (!cellData.canChange) {
         cellClassesArr.push('board__cell--no-change')
       }
 
