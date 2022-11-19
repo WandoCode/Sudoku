@@ -5,19 +5,12 @@ import solutionStore from '../store/solution.store.js'
 function gameManager() {
   let gridCurrState = []
   let gridSolution = []
+  let id
 
-  const saveGame = (gridGame, gridSolution) => {
-    const gameStoreInstance = gameStore()
-    const solutionStoreInstance = solutionStore()
-
-    const id = Date.now()
-
-    solutionStoreInstance.saveSolution(id, gridSolution)
-    gameStoreInstance.saveGame(id, gridGame)
-  }
   return {
     gridCurrState,
     gridSolution,
+    id,
     launchNewGame: function () {
       const datasMaker = datasFactory()
 
@@ -29,7 +22,16 @@ function gameManager() {
 
       this.gridCurrState = datasMaker.getGrid()
 
-      saveGame(this.gridCurrState, this.gridSolution)
+      this.saveGame(this.gridCurrState, this.gridSolution)
+    },
+    saveGame: function (gridGame, gridSolution) {
+      const gameStoreInstance = gameStore()
+      const solutionStoreInstance = solutionStore()
+
+      this.id = Date.now()
+
+      solutionStoreInstance.saveSolution(this.id, gridSolution)
+      gameStoreInstance.saveGame(this.id, gridGame)
     },
   }
 }
