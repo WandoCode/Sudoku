@@ -3,19 +3,27 @@ import rowFactory from './rowDOMFactory.js'
 
 function gridDOMFactory(id, gridDatas) {
   let board
-  console.log({ id, gridDatas })
-  const toggleValues = (posX, posY) => {
+
+  const toggleValue = (value) => {
+    let newValue = value ? value + 1 : 1
+
+    newValue = newValue > 9 ? null : newValue
+
+    return newValue
+  }
+
+  const updateValue = (posX, posY) => {
     const cellData = gridDatas.find((cell) => {
       return cell.position.x === posX && cell.position.y === posY
     })
 
     const value = cellData.value
-
-    const newValue = value + 1
+    const newValue = toggleValue(value)
 
     cellData.value = newValue
 
     gameStore().saveGame(id, gridDatas)
+
     return newValue
   }
 
@@ -40,7 +48,7 @@ function gridDOMFactory(id, gridDatas) {
         const canChange = e.target.getAttribute('data-canChange') === 'true'
 
         if (canChange) {
-          const newValue = toggleValues(posX, posY)
+          const newValue = updateValue(posX, posY)
           e.target.innerHTML = newValue
         }
       })
