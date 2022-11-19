@@ -164,7 +164,7 @@ function datasFactory() {
       const trimmedGrid = this.grid.map((cell) => {
         const keepCellValue = evalKeepCell(cell, keptPositionsArrIdentifiers)
 
-        if (keepCellValue) return cell
+        if (keepCellValue) return { ...cell, canChange: false }
         else return { ...cell, value: null }
       })
 
