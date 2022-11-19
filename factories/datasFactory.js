@@ -16,9 +16,32 @@ function datasFactory() {
       return cell.position.x === posX && cell.position.y === posY
     })
   }
+
+  const getRandomPositions = (nbr) => {
+    const maxPos = { x: 8, y: 8 }
+
+    const resArr = []
+    while (resArr.length < nbr) {
+      const xRandom = Math.floor(Math.random() * (maxPos.x + 1))
+      const yRandom = Math.floor(Math.random() * (maxPos.y + 1))
+
+      const positionAlreadyInArr = resArr.some((el) => {
+        return el.x === xRandom && el.y === yRandom
+      })
+
+      if (!positionAlreadyInArr) {
+        resArr.push({ x: xRandom, y: yRandom })
+      }
+    }
+    return resArr
+  }
+
   return {
     grid: [],
 
+    getGrid: function () {
+      return JSON.parse(JSON.stringify(this.grid))
+    },
     getRandomFullValidGrid: function () {
       let searchingValidValues = true
 
@@ -42,17 +65,17 @@ function datasFactory() {
       let currPosX = 0
       let currPosY = 0
       let currCellIndex = 0
-      let searchingAValidValue = true
+      let noValidValueFound = true
 
       while (currPosX !== null && currPosY !== null) {
-        searchingAValidValue = this.fillCellWithValidValue(
+        noValidValueFound = this.fillCellWithValidValue(
           currCellIndex,
           currPosX,
           currPosY
         )
 
-        //No valid value has been found: begin a new grid
-        if (searchingAValidValue) {
+        //No valid value has been found: this grid can't be resolved
+        if (noValidValueFound) {
           break
         }
 
@@ -64,8 +87,8 @@ function datasFactory() {
         currCellIndex = getCellIndex(this.grid, currPosX, currPosY)
       }
 
-      // When searchingAValidValue=false at this point it means the grid as has been filled
-      return searchingAValidValue
+      // When noValidValueFound=false at this point it means the grid as has been filled
+      return noValidValueFound
     },
 
     getNextEmptyCellPos: function (currPosX, currPosY) {
@@ -118,6 +141,17 @@ function datasFactory() {
 
       // If searchingAValidValue is true here, it means that a value has not be found after 50 guess => I asume that there is no valid value possible
       return searchingAValidValue
+    },
+    makeGridPlayable: function (difficulty) {
+      // {difficulty: # of number that stay on the grid}
+      const difficultiesInterface = { easy: 15, medium: 11, hard: 7 }
+
+      const numbersLeftOnGrid = difficultiesInterface[difficulty]
+      const keptPositionsArr = getRandomPositions(numbersLeftOnGrid)
+
+      // const trimmedGrid = this.grid.map(cell=>{
+      //   if(cell)
+      // })
     },
   }
 }

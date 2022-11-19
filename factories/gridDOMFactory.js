@@ -1,7 +1,7 @@
-import rowFactory from './rowDOMFactory'
+import rowFactory from './rowDOMFactory.js'
 
-function gridDOMFactory(cellDatas) {
-  const rowGenerator = rowFactory(cellDatas)
+function gridDOMFactory(gridDatas) {
+  const rowGenerator = rowFactory(gridDatas)
 
   const createBoard = () => {
     const table = document.createElement('table')

@@ -1,0 +1,20 @@
+.board {
+  font-size: 20px;
+  border-collapse: collapse;
+  border: 2px black solid;
+}
+
+.board__cell {
+  border: 1px black solid;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+}
+
+.board__row:nth-child(3n) {
+  border-bottom: 2px black solid;
+}
+
+.board__cell:nth-child(3n) {
+  border-right: 2px black solid;
+}

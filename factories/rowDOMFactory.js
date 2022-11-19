@@ -1,7 +1,7 @@
 function rowDOMFactory(cellDatas) {
   const createRow = (posY) => {
     const row = document.createElement('tr')
-    row.classList.add('board')
+    row.classList.add('board__row')
 
     for (let i = 0; i < 9; i++) {
       const newCell = createCell(i, posY)
@@ -13,6 +13,8 @@ function rowDOMFactory(cellDatas) {
 
   const createCell = (posX, posY) => {
     const cell = document.createElement('td')
+    cell.classList.add('board__cell')
+
     cell.setAttribute('data-pos-x', posX)
     cell.setAttribute('data-pos-y', posY)
 
