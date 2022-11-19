@@ -168,7 +168,7 @@ function datasFactory() {
         else return { ...cell, value: null }
       })
 
-      return trimmedGrid
+      this.grid = trimmedGrid
     },
   }
 }
