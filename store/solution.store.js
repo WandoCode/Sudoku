@@ -1,10 +1,10 @@
 const solutionStore = function () {
   const getSolution = (solutionId) => {
-    const solutionObject = localStorage.getItem('solution')
+    const solutionJSON = localStorage.getItem('solution')
 
-    if (!solutionObject) return console.log('No saved solution available')
+    if (!solutionJSON) return console.log('No saved solution available')
 
-    const { id, solution } = solutionObject
+    const { id, solution } = JSON.parse(solutionJSON)
 
     if (id !== solutionId)
       return console.log("The solution id and game id doesn't match")
@@ -13,8 +13,8 @@ const solutionStore = function () {
   }
 
   const saveSolution = (id, solutionGridDatas) => {
-    const solutionObject = { id, solution: solutionGridDatas }
-    localStorage.setItem('solution', solutionObject)
+    const solutionJSON = JSON.stringify({ id, solution: solutionGridDatas })
+    localStorage.setItem('solution', solutionJSON)
   }
 
   const delSolution = () => {
