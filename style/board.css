@@ -18,3 +18,7 @@
 .board__cell:nth-child(3n) {
   border-right: 2px black solid;
 }
+
+.board__cell--no-change {
+  font-weight: 800;
+}
