@@ -7,6 +7,9 @@ function gameManager() {
   let gridSolution = []
   let id
 
+  const gStore = gameStore()
+  const sStore = solutionStore()
+
   return {
     gridCurrState,
     gridSolution,
@@ -24,14 +27,21 @@ function gameManager() {
 
       this.saveGame(this.gridCurrState, this.gridSolution)
     },
-    saveGame: function (gridGame, gridSolution) {
-      const gameStoreInstance = gameStore()
-      const solutionStoreInstance = solutionStore()
+    loadGame: function () {
+      this.id = gStore.getSavedId()
 
+      if (!this.id) return false
+
+      this.gridCurrState = gStore.getGame(this.id)
+      this.gridSolution = sStore.getSolution(this.id)
+
+      return true
+    },
+    saveGame: function (gridGame, gridSolution) {
       this.id = Date.now()
 
-      solutionStoreInstance.saveSolution(this.id, gridSolution)
-      gameStoreInstance.saveGame(this.id, gridGame)
+      sStore.saveSolution(this.id, gridSolution)
+      gStore.saveGame(this.id, gridGame)
     },
   }
 }

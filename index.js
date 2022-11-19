@@ -14,8 +14,9 @@ const drawGrid = ({ id, gridDatas }) => {
 }
 
 const game = gameManager()
+const gameLoaded = game.loadGame()
 
-game.launchNewGame()
+if (!gameLoaded) game.launchNewGame()
 
 const gridDatas = game.gridCurrState
 const id = game.id

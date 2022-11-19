@@ -1,6 +1,6 @@
 const gameStore = function () {
   const getGame = (gameId) => {
-    const gameJSON = localStorage.getItem('solution')
+    const gameJSON = localStorage.getItem('game')
 
     if (!gameJSON) return console.log('No saved game available')
 
@@ -12,6 +12,15 @@ const gameStore = function () {
     return gameGrid
   }
 
+  const getSavedId = () => {
+    const gameJSON = localStorage.getItem('game')
+
+    if (!gameJSON) return console.log('No saved game available')
+
+    const { id } = JSON.parse(gameJSON)
+    return id
+  }
+
   const saveGame = (id, gameGridDatas) => {
     const gameJSON = JSON.stringify({ id, gameGrid: gameGridDatas })
     localStorage.setItem('game', gameJSON)
@@ -21,7 +30,7 @@ const gameStore = function () {
     return localStorage.clear()
   }
 
-  return { getGame, saveGame, delGame }
+  return { getGame, saveGame, delGame, getSavedId }
 }
 
 export default gameStore
