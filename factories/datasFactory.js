@@ -36,6 +36,12 @@ function datasFactory() {
     return resArr
   }
 
+  const evalKeepCell = (cell, identifiersArr) => {
+    const cellIdentifier = `${cell.position.x}${cell.position.y}`
+
+    return identifiersArr.includes(cellIdentifier)
+  }
+
   return {
     grid: [],
 
@@ -142,16 +148,27 @@ function datasFactory() {
       // If searchingAValidValue is true here, it means that a value has not be found after 50 guess => I asume that there is no valid value possible
       return searchingAValidValue
     },
+
     makeGridPlayable: function (difficulty) {
       // {difficulty: # of number that stay on the grid}
       const difficultiesInterface = { easy: 15, medium: 11, hard: 7 }
 
-      const numbersLeftOnGrid = difficultiesInterface[difficulty]
-      const keptPositionsArr = getRandomPositions(numbersLeftOnGrid)
+      const quantityOfCellsLeftOnGrid = difficultiesInterface[difficulty]
 
-      // const trimmedGrid = this.grid.map(cell=>{
-      //   if(cell)
-      // })
+      const keptPositionsArr = getRandomPositions(quantityOfCellsLeftOnGrid)
+
+      const keptPositionsArrIdentifiers = keptPositionsArr.map((el) => {
+        return `${el.x}${el.y}`
+      })
+
+      const trimmedGrid = this.grid.map((cell) => {
+        const keepCellValue = evalKeepCell(cell, keptPositionsArrIdentifiers)
+
+        if (keepCellValue) return cell
+        else return { ...cell, value: null }
+      })
+
+      return trimmedGrid
     },
   }
 }
