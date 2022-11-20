@@ -1,16 +1,5 @@
 function cellDOMFactory(cellData, posX, posY) {
-  let cellDOM
-
-  const handleCellHovering = (e) => {
-    e.target.addEventListener('mouseleave', handleCellLeave)
-
-    // Check if the hovered el is a cell
-    const posX = e.target.getAttribute('data-pos-x')
-    const posY = e.target.getAttribute('data-pos-y')
-
-    if (!posX || !posY) return
-
-    // Add a class to all the cell on the same colupmn or row than the hovered cell
+  const addClassToCellsOnSameRowColumn = (posX, posY) => {
     const allCells = document.getElementsByClassName('board__cell')
 
     const cellsArr = [...allCells]
@@ -18,12 +7,24 @@ function cellDOMFactory(cellData, posX, posY) {
       const currCellPosX = cell.getAttribute('data-pos-x')
       const currCellPosY = cell.getAttribute('data-pos-y')
 
-      if (currCellPosX !== posX && currCellPosY !== posY) return
-      else return cell.classList.add('in-cross')
+      if (currCellPosX === posX || currCellPosY === posY)
+        cell.classList.add('in-cross')
     })
   }
 
-  const handleCellLeave = (e) => {
+  const handleCellHovering = (e) => {
+    e.target.addEventListener('mouseleave', handleCellLeave)
+
+    const posX = e.target.getAttribute('data-pos-x')
+    const posY = e.target.getAttribute('data-pos-y')
+
+    const targetIsACell = posX && posY
+    if (!targetIsACell) return
+
+    addClassToCellsOnSameRowColumn(posX, posY)
+  }
+
+  const handleCellLeave = () => {
     const allCells = document.getElementsByClassName('board__cell')
     const cellsArr = [...allCells]
     cellsArr.forEach((cell) => {
@@ -34,8 +35,9 @@ function cellDOMFactory(cellData, posX, posY) {
         return cell.classList.remove('in-cross')
     })
   }
+
   return {
-    cellDOM,
+    cellDOM: null,
     createCellDOM: function () {
       this.cellDOM = document.createElement('div')
       this.cellDOM.classList.add('board__cell')

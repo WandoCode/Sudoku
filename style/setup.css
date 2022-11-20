@@ -2,3 +2,19 @@ body,
 input {
   font-family: var(--font-main);
 }
+
+body {
+  height: 100vh;
+
+  background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-500));
+}
+
+main {
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
