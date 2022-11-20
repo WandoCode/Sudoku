@@ -25,7 +25,8 @@ function UIFactory(game) {
   }
 
   const handleNewGameBtn = () => {
-    const selectEl = document.getElementsByClassName('select-difficulty')[0]
+    const selectEl = document.getElementById('select-difficulty')
+    console.log(selectEl)
     const difficulty = selectEl.value
 
     game.launchNewGame(difficulty)
@@ -33,38 +34,7 @@ function UIFactory(game) {
   }
 
   const drawSelectDifficulty = () => {
-    const difficulties = {
-      facile: 'easy',
-      intermédiaire: 'medium',
-      difficile: 'hard',
-    }
-
     const container = document.getElementsByClassName('difficulty-container')[0]
-
-    const select = document.createElement('select')
-    select.classList.add('select-difficulty')
-
-    addOptionsDOM(difficulties, select)
-
-    container.appendChild(select)
-  }
-
-  const addOptionsDOM = (difficulties, selectDOM) => {
-    for (const difficultyName in difficulties) {
-      const difficultyValue = difficulties[difficultyName]
-      const option = document.createElement('option')
-      option.value = difficultyValue
-      option.innerText = difficultyName
-
-      selectDOM.appendChild(option)
-    }
-  }
-
-  const drawPage = () => {
-    drawGrid()
-    drawNewGameBtn()
-    drawSelectDifficulty()
-    const main = document.getElementsByTagName('main')[0]
 
     const difficulties = {
       easy: 'facile',
@@ -72,7 +42,13 @@ function UIFactory(game) {
       hard: 'difficile',
     }
 
-    main.appendChild(selectFactory(difficulties).createCustomSelect())
+    container.appendChild(selectFactory(difficulties).createCustomSelect())
+  }
+
+  const drawPage = () => {
+    drawGrid()
+    drawNewGameBtn()
+    drawSelectDifficulty()
   }
 
   return { drawPage }

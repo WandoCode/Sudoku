@@ -7,18 +7,19 @@ function selectFactory(options) {
     optionDOM.classList.remove('current-value')
   }
 
-  const getSelectDOM = () => {
+  const getSelectDOM = (currentValue) => {
     const select = document.createElement('input')
     select.type = 'checkbox'
     select.name = 'select'
-    select.id = 'select-input'
+    select.id = 'select-difficulty'
+    select.value = currentValue
 
     return select
   }
 
   const getSelectLabelDOM = () => {
     const selectLabel = document.createElement('label')
-    selectLabel.htmlFor = 'select-input'
+    selectLabel.htmlFor = 'select-difficulty'
     selectLabel.id = 'select'
 
     return selectLabel
@@ -52,8 +53,12 @@ function selectFactory(options) {
   }
 
   const redraw = function (currentValue) {
-    const select = document.getElementById('select')
-    select.innerText = options[currentValue]
+    const select = document.getElementById('select-difficulty')
+    const selectLabel = document.getElementById('select')
+
+    selectLabel.innerText = options[currentValue]
+    select.value = currentValue
+
     updateOptionsClasses(currentValue)
   }
 
@@ -61,8 +66,8 @@ function selectFactory(options) {
     currentValue: Object.keys(options)[0],
     createCustomSelect: function () {
       const container = document.createElement('div')
-
-      const select = getSelectDOM()
+      container.classList.add('select-container')
+      const select = getSelectDOM(this.currentValue)
       const selectLabel = getSelectLabelDOM()
       const optionDOM = this.getOptionsDOM(options)
 
@@ -85,12 +90,7 @@ function selectFactory(options) {
         container.appendChild(option)
 
         option.addEventListener('click', (e) => {
-          const optionNamesArr = Object.keys(options)
-
-          this.currentValue = optionNamesArr.find(
-            (name) => options[name] === e.target.innerText
-          )
-
+          this.currentValue = e.target.getAttribute('data-value')
           redraw(this.currentValue)
         })
       }
