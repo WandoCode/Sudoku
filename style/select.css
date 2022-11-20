@@ -1,0 +1,57 @@
+.select-container {
+  position: relative;
+  width: 10rem;
+}
+
+.select-container input {
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.select-container label {
+  display: block;
+  text-align: center;
+  background-color: var(--clr-primary-200);
+
+  text-align: center;
+  padding-block: 0.2rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px 3px;
+}
+.select-container label:hover {
+  background-color: var(--clr-primary-400);
+}
+
+.select-container ul {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: none;
+  margin: 0;
+  border-radius: 0 0 3px 3px;
+  overflow: hidden;
+}
+
+.select-container li {
+  padding-block: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--clr-primary-200);
+}
+
+.select-container li:hover {
+  background-color: var(--clr-primary-400);
+}
+
+.select-container #select-difficulty:checked ~ label {
+  background-color: var(--clr-primary-400);
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset 0px 0px 5px 0px var(--clr-primary-800);
+}
+
+.select-container #select-difficulty:checked ~ ul {
+  display: block;
+}

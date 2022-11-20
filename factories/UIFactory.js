@@ -37,9 +37,9 @@ function UIFactory(game) {
     const container = document.getElementsByClassName('difficulty-container')[0]
 
     const difficulties = {
-      easy: 'facile',
-      medium: 'intermédiaire',
-      hard: 'difficile',
+      easy: 'Facile',
+      medium: 'Intermédiaire',
+      hard: 'Difficile',
     }
 
     container.appendChild(selectFactory(difficulties).createCustomSelect())
