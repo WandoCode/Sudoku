@@ -33,6 +33,7 @@ function selectFactory(options) {
 
     return option
   }
+
   const openOptionsHandler = () => {
     const body = document.getElementsByTagName('body')[0]
     const optionsDOM = document.getElementsByClassName('options')[0]
@@ -95,6 +96,7 @@ function selectFactory(options) {
     createCustomSelect: function () {
       const container = document.createElement('div')
       container.classList.add('select-container')
+
       const select = getSelectDOM(this.currentValue)
       const selectLabel = getSelectLabelDOM()
       const optionDOM = this.getOptionsDOM(options)
