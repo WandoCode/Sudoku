@@ -7,7 +7,6 @@ function UIFactory(game) {
 
     const grid = gridDOMFactory(game.id, game.gridCurrState)
     grid.createBoard()
-    grid.addListener()
 
     const board = grid.board
 
@@ -33,20 +32,25 @@ function UIFactory(game) {
   }
 
   const drawSelectDifficulty = () => {
-    const difficulties = ['easy', 'medium', 'hard']
+    const difficulties = {
+      facile: 'easy',
+      intermédiaire: 'medium',
+      difficile: 'hard',
+    }
 
     const container = document.getElementsByClassName('difficulty-container')[0]
 
     const select = document.createElement('select')
     select.classList.add('select-difficulty')
 
-    difficulties.forEach((difficulty) => {
+    for (const difficultyName in difficulties) {
+      const difficultyValue = difficulties[difficultyName]
       const option = document.createElement('option')
-      option.value = difficulty
-      option.innerText = difficulty
+      option.value = difficultyValue
+      option.innerText = difficultyName
 
       select.appendChild(option)
-    })
+    }
 
     container.appendChild(select)
   }
@@ -56,6 +60,7 @@ function UIFactory(game) {
     drawNewGameBtn()
     drawSelectDifficulty()
   }
+
   return { drawPage }
 }
 

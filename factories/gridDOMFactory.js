@@ -40,6 +40,7 @@ function gridDOMFactory(id, gridDatas) {
         table.appendChild(newRow)
       }
       this.board = table
+      this.addListener()
     },
     addListener: function () {
       this.board.addEventListener('click', (e) => {
