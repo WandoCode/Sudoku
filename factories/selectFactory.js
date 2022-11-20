@@ -1,18 +1,14 @@
 function selectFactory(options) {
-  const showAsSelected = (optionDOM) => {
-    optionDOM.classList.add('current-value')
-  }
-
-  const hideAsSelected = (optionDOM) => {
-    optionDOM.classList.remove('current-value')
-  }
-
   const getSelectDOM = (currentValue) => {
     const select = document.createElement('input')
     select.type = 'checkbox'
     select.name = 'select'
     select.id = 'select-difficulty'
     select.value = currentValue
+
+    select.addEventListener('change', (ev) => {
+      if (ev.target.checked) openOptionsHandler()
+    })
 
     return select
   }
@@ -36,6 +32,38 @@ function selectFactory(options) {
     if (currentValue === optionValue) showAsSelected(option)
 
     return option
+  }
+  const openOptionsHandler = () => {
+    const body = document.getElementsByTagName('body')[0]
+    const optionsDOM = document.getElementsByClassName('options')[0]
+
+    optionsDOM.style.display = 'block'
+
+    body.addEventListener('click', clickOutsideSelectHandler)
+  }
+
+  const closeOptionsHandler = () => {
+    const select = document.getElementById('select-difficulty')
+    const optionsDOM = document.getElementsByClassName('options')[0]
+    const body = document.getElementsByTagName('body')[0]
+
+    optionsDOM.style.display = 'none'
+    select.checked = false
+
+    body.removeEventListener('click', clickOutsideSelectHandler)
+  }
+
+  const clickOutsideSelectHandler = (e) => {
+    const selectLabel = document.getElementById('select')
+    if (e.target.id !== selectLabel.id) closeOptionsHandler()
+  }
+
+  const showAsSelected = (optionDOM) => {
+    optionDOM.classList.add('current-value')
+  }
+
+  const hideAsSelected = (optionDOM) => {
+    optionDOM.classList.remove('current-value')
   }
 
   const updateOptionsClasses = function (currentValue) {
@@ -82,6 +110,7 @@ function selectFactory(options) {
 
     getOptionsDOM: function (options) {
       const container = document.createElement('ul')
+      container.classList.add('options')
 
       for (const optionValue in options) {
         const optionName = options[optionValue]
@@ -91,6 +120,8 @@ function selectFactory(options) {
 
         option.addEventListener('click', (e) => {
           this.currentValue = e.target.getAttribute('data-value')
+
+          closeOptionsHandler()
           redraw(this.currentValue)
         })
       }
