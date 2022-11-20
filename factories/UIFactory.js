@@ -1,4 +1,5 @@
 import gridDOMFactory from './gridDOMFactory.js'
+import selectFactory from './selectFactory.js'
 
 function UIFactory(game) {
   const drawGrid = () => {
@@ -43,22 +44,35 @@ function UIFactory(game) {
     const select = document.createElement('select')
     select.classList.add('select-difficulty')
 
+    addOptionsDOM(difficulties, select)
+
+    container.appendChild(select)
+  }
+
+  const addOptionsDOM = (difficulties, selectDOM) => {
     for (const difficultyName in difficulties) {
       const difficultyValue = difficulties[difficultyName]
       const option = document.createElement('option')
       option.value = difficultyValue
       option.innerText = difficultyName
 
-      select.appendChild(option)
+      selectDOM.appendChild(option)
     }
-
-    container.appendChild(select)
   }
 
   const drawPage = () => {
     drawGrid()
     drawNewGameBtn()
     drawSelectDifficulty()
+    const main = document.getElementsByTagName('main')[0]
+
+    const difficulties = {
+      easy: 'facile',
+      medium: 'intermédiaire',
+      hard: 'difficile',
+    }
+
+    main.appendChild(selectFactory(difficulties).createCustomSelect())
   }
 
   return { drawPage }
