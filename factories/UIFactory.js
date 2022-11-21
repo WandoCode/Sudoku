@@ -79,7 +79,25 @@ function UIFactory(game) {
     })
   }
 
-  return { drawPage, redrawCellValue }
+  const drawErrors = (errors) => {
+    console.log(errors)
+    const allCells = nodes.getAllCells()
+    const cellsArr = [...allCells]
+
+    cellsArr.forEach((cell) => {
+      const currCellPosX = cell.getAttribute('data-pos-x')
+      const currCellPosY = cell.getAttribute('data-pos-y')
+      errors.forEach((error) => {
+        if (
+          parseInt(currCellPosX) === error.x &&
+          parseInt(currCellPosY) === error.y
+        ) {
+          cell.classList.add('cell--error')
+        }
+      })
+    })
+  }
+  return { drawPage, redrawCellValue, drawErrors }
 }
 
 export default UIFactory

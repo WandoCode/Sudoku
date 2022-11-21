@@ -41,7 +41,7 @@ function cellDOMFactory(cellData, posX, posY) {
     })
   }
 
-  const handleClick = (e) => {
+  const handleClickCell = function (e) {
     const posX = e.target.getAttribute('data-pos-x')
     const posY = e.target.getAttribute('data-pos-y')
     const canChange = e.target.getAttribute('data-canChange')
@@ -60,10 +60,11 @@ function cellDOMFactory(cellData, posX, posY) {
         const isClicked =
           cell.getAttribute('data-clicked') === 'true' ? true : false
         cell.setAttribute('data-clicked', !isClicked)
-      } else cell.setAttribute('data-clicked', false)
+      } else {
+        cell.setAttribute('data-clicked', false)
+      }
     })
   }
-
   return {
     cellDOM: null,
     createCellDOM: function () {
@@ -75,7 +76,7 @@ function cellDOMFactory(cellData, posX, posY) {
       this.addAttribute()
 
       this.cellDOM.addEventListener('mouseenter', handleCellHovering)
-      this.cellDOM.addEventListener('click', handleClick)
+      this.cellDOM.addEventListener('click', handleClickCell)
     },
 
     addCellClasses: function () {
