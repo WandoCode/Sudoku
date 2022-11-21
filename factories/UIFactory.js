@@ -70,7 +70,7 @@ function UIFactory(game) {
       const currCellPosY = cell.getAttribute('data-pos-y')
 
       if (currCellPosX === posX && currCellPosY === posY) {
-        if (options.includes('canChange')) {
+        if (options.includes('canNotChange')) {
           cell.setAttribute('data-canChange', 'false')
         }
         cell.innerText = value !== '0' ? value : ''

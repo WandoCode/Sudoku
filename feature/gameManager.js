@@ -14,7 +14,10 @@ function gameManager() {
 
   const getRandomEmptyCellPosition = (grid) => {
     let emptyCellPosition
-    while (!emptyCellPosition) {
+    let count = 0
+    while (!emptyCellPosition && count < 200) {
+      count++
+
       const posX = getRandomNbr(8)
       const posY = getRandomNbr(8)
 
@@ -61,20 +64,24 @@ function gameManager() {
       gStore.saveGame(this.id, this.gridCurrState)
     },
 
-    updateCell: function (cellPosX, cellPosY, newValue, saveForUndo = true) {
+    updateCell: function (cellPosX, cellPosY, newValue, option = []) {
       this.gridCurrState = this.gridCurrState.map((cell) => {
         if (
           cell.position.x == cellPosX &&
           cell.position.y == cellPosY &&
           cell.canChange
         ) {
-          if (saveForUndo) {
+          if (option.includes('saveForUndo')) {
             this.precStates.push({
               x: cellPosX,
               y: cellPosY,
               value: cell.value,
             })
           }
+          if (option.includes('canNotChange')) {
+            cell.canChange = false
+          }
+
           cell.value = newValue
         }
         return cell
@@ -91,7 +98,7 @@ function gameManager() {
         lastStateChange.x,
         lastStateChange.y,
         lastStateChange.value,
-        false
+        ['saveForUndo']
       )
       UIFactory().redrawCellValue(
         lastStateChange.x,
@@ -101,6 +108,9 @@ function gameManager() {
     },
     giveHint: function () {
       const emptyCellPosition = getRandomEmptyCellPosition(this.gridCurrState)
+
+      if (!emptyCellPosition) return
+
       const hintCell = this.gridSolution.find((cell) => {
         return (
           cell.position.x === emptyCellPosition.posX &&
@@ -108,13 +118,18 @@ function gameManager() {
         )
       })
 
-      this.updateCell(hintCell.position.x, hintCell.position.y, hintCell.value)
+      this.updateCell(
+        hintCell.position.x,
+        hintCell.position.y,
+        hintCell.value,
+        ['canNotChange']
+      )
 
       UIFactory().redrawCellValue(
         String(hintCell.position.x),
         String(hintCell.position.y),
         String(hintCell.value),
-        ['canChange']
+        ['canNotChange']
       )
     },
   }
