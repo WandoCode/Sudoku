@@ -61,7 +61,19 @@ function UIFactory(game) {
     drawKeyboard()
   }
 
-  return { drawPage }
+  const redrawCellValue = (posX, posY, value) => {
+    const allCells = nodes.getAllCells()
+    const cellsArr = [...allCells]
+
+    cellsArr.forEach((cell) => {
+      const currCellPosX = cell.getAttribute('data-pos-x')
+      const currCellPosY = cell.getAttribute('data-pos-y')
+
+      if (currCellPosX === posX && currCellPosY === posY)
+        return (cell.innerText = value !== '0' ? value : '')
+    })
+  }
+  return { drawPage, redrawCellValue }
 }
 
 export default UIFactory

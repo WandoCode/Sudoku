@@ -1,4 +1,5 @@
 import datasFactory from '../factories/datasFactory.js'
+import UIFactory from '../factories/UIFactory.js'
 import gameStore from '../store/game.store.js'
 import solutionStore from '../store/solution.store.js'
 
@@ -8,6 +9,7 @@ function gameManager() {
 
   return {
     gridCurrState: [],
+    precStates: [], //[{ x: null, y: null, value: null }]
     gridSolution: [],
     id: null,
     launchNewGame: function (difficulty) {
@@ -16,7 +18,6 @@ function gameManager() {
       datasMaker.getRandomFullValidGrid()
 
       this.gridSolution = datasMaker.getGrid()
-
       datasMaker.makeGridPlayable(difficulty)
 
       this.gridCurrState = datasMaker.getGrid()
@@ -33,24 +34,50 @@ function gameManager() {
 
       return true
     },
-    saveGame: function (gridGame, gridSolution) {
+    saveGame: function () {
       this.id = Date.now()
 
-      sStore.saveSolution(this.id, gridSolution)
-      gStore.saveGame(this.id, gridGame)
+      sStore.saveSolution(this.id, this.gridSolution)
+      gStore.saveGame(this.id, this.gridCurrState)
     },
-    updateCell: function (cellPosX, cellPosY, newValue) {
-      const updateBoard = this.gridCurrState.map((cell) => {
+
+    updateCell: function (cellPosX, cellPosY, newValue, saveForUndo = true) {
+      this.gridCurrState = this.gridCurrState.map((cell) => {
         if (
           cell.position.x == cellPosX &&
           cell.position.y == cellPosY &&
           cell.canChange
         ) {
+          if (saveForUndo) {
+            this.precStates.push({
+              x: cellPosX,
+              y: cellPosY,
+              value: cell.value,
+            })
+          }
           cell.value = newValue
         }
         return cell
       })
-      this.saveGame(updateBoard, this.gridSolution)
+
+      this.saveGame()
+    },
+    undo: function () {
+      const lastStateChange = this.precStates.pop()
+
+      if (!lastStateChange) return
+
+      this.updateCell(
+        lastStateChange.x,
+        lastStateChange.y,
+        lastStateChange.value,
+        false
+      )
+      UIFactory().redrawCellValue(
+        lastStateChange.x,
+        lastStateChange.y,
+        lastStateChange.value
+      )
     },
   }
 }
