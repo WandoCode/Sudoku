@@ -84,7 +84,7 @@
   border-right: none;
 }
 
-.board__cell--no-change {
+.board__cell[data-canChange='false'] {
   font-weight: 500;
   color: var(--clr-main-300);
 }

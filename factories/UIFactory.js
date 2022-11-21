@@ -61,7 +61,7 @@ function UIFactory(game) {
     drawKeyboard()
   }
 
-  const redrawCellValue = (posX, posY, value) => {
+  const redrawCellValue = (posX, posY, value, options = []) => {
     const allCells = nodes.getAllCells()
     const cellsArr = [...allCells]
 
@@ -69,8 +69,13 @@ function UIFactory(game) {
       const currCellPosX = cell.getAttribute('data-pos-x')
       const currCellPosY = cell.getAttribute('data-pos-y')
 
-      if (currCellPosX === posX && currCellPosY === posY)
-        return (cell.innerText = value !== '0' ? value : '')
+      if (currCellPosX === posX && currCellPosY === posY) {
+        if (options.includes('canChange')) {
+          cell.setAttribute('data-canChange', 'false')
+        }
+        cell.innerText = value !== '0' ? value : ''
+      }
+      return
     })
   }
 

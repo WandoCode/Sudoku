@@ -113,7 +113,8 @@ function gameManager() {
       UIFactory().redrawCellValue(
         String(hintCell.position.x),
         String(hintCell.position.y),
-        String(hintCell.value)
+        String(hintCell.value),
+        ['canChange']
       )
     },
   }
