@@ -4,4 +4,8 @@ const getCellIndex = (grid, posX, posY) => {
   })
 }
 
-export { getCellIndex }
+const getRandomNbr = (max) => {
+  return Math.floor(Math.random() * (max + 1))
+}
+
+export { getCellIndex, getRandomNbr }

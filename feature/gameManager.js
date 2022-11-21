@@ -1,5 +1,5 @@
 import datasFactory from '../factories/datasFactory.js'
-import { getCellIndex } from '../factories/helpers.js'
+import { getCellIndex, getRandomNbr } from '../factories/helpers.js'
 import UIFactory from '../factories/UIFactory.js'
 import gameStore from '../store/game.store.js'
 import solutionStore from '../store/solution.store.js'
@@ -8,13 +8,10 @@ function gameManager() {
   const gStore = gameStore()
   const sStore = solutionStore()
 
-  const getRandomNbr = (max) => {
-    return Math.floor(Math.random() * (max + 1))
-  }
-
   const getRandomEmptyCellPosition = (grid) => {
     let emptyCellPosition
     let count = 0
+
     while (!emptyCellPosition && count < 200) {
       count++
 
@@ -66,21 +63,20 @@ function gameManager() {
 
     updateCell: function (cellPosX, cellPosY, newValue, option = []) {
       this.gridCurrState = this.gridCurrState.map((cell) => {
-        if (
+        const cellIsValid =
           cell.position.x == cellPosX &&
           cell.position.y == cellPosY &&
           cell.canChange
-        ) {
-          if (option.includes('saveForUndo')) {
+
+        if (cellIsValid) {
+          if (option.includes('saveForUndo'))
             this.precStates.push({
               x: cellPosX,
               y: cellPosY,
               value: cell.value,
             })
-          }
-          if (option.includes('canNotChange')) {
-            cell.canChange = false
-          }
+
+          if (option.includes('canNotChange')) cell.canChange = false
 
           cell.value = newValue
         }
@@ -106,6 +102,7 @@ function gameManager() {
         lastStateChange.value
       )
     },
+
     giveHint: function () {
       const emptyCellPosition = getRandomEmptyCellPosition(this.gridCurrState)
 

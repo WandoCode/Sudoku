@@ -44,9 +44,10 @@ function cellDOMFactory(cellData, posX, posY) {
   const handleClick = (e) => {
     const posX = e.target.getAttribute('data-pos-x')
     const posY = e.target.getAttribute('data-pos-y')
+    const canChange = e.target.getAttribute('data-canChange')
 
-    const targetIsACell = posX && posY
-    if (!targetIsACell) return
+    const targetIsValidCell = posX && posY && canChange === 'true'
+    if (!targetIsValidCell) return
 
     const allCells = nodes.getAllCells()
     const cellsArr = [...allCells]

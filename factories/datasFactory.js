@@ -1,6 +1,6 @@
 import cellFactory from './cellFactory.js'
 import checkFactory from './checkFactory.js'
-import { getCellIndex } from './helpers.js'
+import { getCellIndex, getRandomNbr } from './helpers.js'
 
 function datasFactory() {
   const createEmptyCell = (posX, posY) => {
@@ -9,7 +9,7 @@ function datasFactory() {
   }
 
   const getRandomArrValue = (arr) => {
-    return arr[Math.floor(Math.random() * arr.length)]
+    return arr[getRandomNbr(arr.length - 1)]
   }
 
   const getRandomPositions = (nbr) => {
@@ -17,8 +17,8 @@ function datasFactory() {
 
     const resArr = []
     while (resArr.length < nbr) {
-      const xRandom = Math.floor(Math.random() * (maxPos.x + 1))
-      const yRandom = Math.floor(Math.random() * (maxPos.y + 1))
+      const xRandom = getRandomNbr(maxPos.x)
+      const yRandom = getRandomNbr(maxPos.y)
 
       const positionAlreadyInArr = resArr.some((el) => {
         return el.x === xRandom && el.y === yRandom
