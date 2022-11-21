@@ -1,5 +1,6 @@
 import cellFactory from './cellFactory.js'
 import checkFactory from './checkFactory.js'
+import { getCellIndex } from './helpers.js'
 
 function datasFactory() {
   const createEmptyCell = (posX, posY) => {
@@ -9,12 +10,6 @@ function datasFactory() {
 
   const getRandomArrValue = (arr) => {
     return arr[Math.floor(Math.random() * arr.length)]
-  }
-
-  const getCellIndex = (grid, posX, posY) => {
-    return grid.findIndex((cell) => {
-      return cell.position.x === posX && cell.position.y === posY
-    })
   }
 
   const getRandomPositions = (nbr) => {

@@ -1,19 +1,8 @@
-import gameStore from '../store/game.store.js'
 import rowFactory from './rowDOMFactory.js'
 
-function gridDOMFactory(id, gridDatas) {
-  let board
-
-  const toggleValue = (value) => {
-    let newValue = value ? value + 1 : 1
-
-    newValue = newValue > 9 ? null : newValue
-
-    return newValue
-  }
-
+function gridDOMFactory(gridDatas) {
   return {
-    board,
+    board: [],
     createBoard: function () {
       const rowGenerator = rowFactory(gridDatas)
 

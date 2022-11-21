@@ -1,4 +1,5 @@
 import datasFactory from '../factories/datasFactory.js'
+import { getCellIndex } from '../factories/helpers.js'
 import UIFactory from '../factories/UIFactory.js'
 import gameStore from '../store/game.store.js'
 import solutionStore from '../store/solution.store.js'
@@ -6,6 +7,25 @@ import solutionStore from '../store/solution.store.js'
 function gameManager() {
   const gStore = gameStore()
   const sStore = solutionStore()
+
+  const getRandomNbr = (max) => {
+    return Math.floor(Math.random() * (max + 1))
+  }
+
+  const getRandomEmptyCellPosition = (grid) => {
+    let emptyCellPosition
+    while (!emptyCellPosition) {
+      const posX = getRandomNbr(8)
+      const posY = getRandomNbr(8)
+
+      const cell = grid[getCellIndex(grid, posX, posY)]
+      const cellIsEmpty = cell.value === null
+
+      if (cellIsEmpty) emptyCellPosition = { posX, posY }
+    }
+
+    return emptyCellPosition
+  }
 
   return {
     gridCurrState: [],
@@ -77,6 +97,23 @@ function gameManager() {
         lastStateChange.x,
         lastStateChange.y,
         lastStateChange.value
+      )
+    },
+    giveHint: function () {
+      const emptyCellPosition = getRandomEmptyCellPosition(this.gridCurrState)
+      const hintCell = this.gridSolution.find((cell) => {
+        return (
+          cell.position.x === emptyCellPosition.posX &&
+          cell.position.y === emptyCellPosition.posY
+        )
+      })
+
+      this.updateCell(hintCell.position.x, hintCell.position.y, hintCell.value)
+
+      UIFactory().redrawCellValue(
+        String(hintCell.position.x),
+        String(hintCell.position.y),
+        String(hintCell.value)
       )
     },
   }

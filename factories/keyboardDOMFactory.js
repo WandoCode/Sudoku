@@ -4,6 +4,19 @@ import UIFactory from './UIFactory.js'
 function keyboardDOMFactory(game) {
   const nodes = nodeSelectors()
 
+  const createHintKey = () => {
+    const keyboardHint = document.createElement('button')
+    keyboardHint.classList.add('keyboard__undo')
+
+    keyboardHint.value = 'hint'
+    keyboardHint.innerText = 'Hint'
+    keyboardHint.onclick = handleHint
+    return keyboardHint
+  }
+
+  const handleHint = () => {
+    game.giveHint()
+  }
   const createUndoKey = () => {
     const keyboardUndo = document.createElement('button')
     keyboardUndo.classList.add('keyboard__undo')
@@ -21,6 +34,7 @@ function keyboardDOMFactory(game) {
     const container = document.createElement('div')
     container.classList.add('keyboard__specials')
     container.appendChild(createUndoKey())
+    container.appendChild(createHintKey())
 
     return container
   }
@@ -55,6 +69,8 @@ function keyboardDOMFactory(game) {
   const handleClick = (e) => {
     const value = e.target.value
     const clickedCell = nodes.getClickedCell()
+
+    if (!clickedCell) return
 
     const clickedCellPosX = clickedCell.getAttribute('data-pos-x')
     const clickedCellPosY = clickedCell.getAttribute('data-pos-y')

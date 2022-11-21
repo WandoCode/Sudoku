@@ -10,7 +10,7 @@ function UIFactory(game) {
     const container = nodes.getGameContainer()
     container.innerHTML = ''
 
-    const grid = gridDOMFactory(game.id, game.gridCurrState)
+    const grid = gridDOMFactory(game.gridCurrState)
     grid.createBoard()
 
     const board = grid.board
@@ -73,6 +73,7 @@ function UIFactory(game) {
         return (cell.innerText = value !== '0' ? value : '')
     })
   }
+
   return { drawPage, redrawCellValue }
 }
 
