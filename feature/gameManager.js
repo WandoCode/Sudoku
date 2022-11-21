@@ -39,6 +39,19 @@ function gameManager() {
       sStore.saveSolution(this.id, gridSolution)
       gStore.saveGame(this.id, gridGame)
     },
+    updateCell: function (cellPosX, cellPosY, newValue) {
+      const updateBoard = this.gridCurrState.map((cell) => {
+        if (
+          cell.position.x == cellPosX &&
+          cell.position.y == cellPosY &&
+          cell.canChange
+        ) {
+          cell.value = newValue
+        }
+        return cell
+      })
+      this.saveGame(updateBoard, this.gridSolution)
+    },
   }
 }
 

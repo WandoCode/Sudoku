@@ -37,7 +37,7 @@
   justify-content: center;
 }
 
-.board__cell:not(.board__cell--no-change):hover {
+.board__cell[data-clicked='true'] {
   scale: 120%;
   background: linear-gradient(
     125deg,
@@ -52,7 +52,7 @@
   z-index: 1;
 }
 
-.board__cell:not(.board__cell--no-change):hover::before {
+.board__cell[data-clicked='true']::before {
   content: '';
   position: absolute;
   top: 0;
@@ -78,6 +78,9 @@
 }
 
 .board__cell:nth-child(9n) {
+  border-right: none;
+}
+.board__cell:nth-child(3n)[data-clicked='true'] {
   border-right: none;
 }
 

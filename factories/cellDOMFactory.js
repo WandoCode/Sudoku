@@ -41,6 +41,28 @@ function cellDOMFactory(cellData, posX, posY) {
     })
   }
 
+  const handleClick = (e) => {
+    const posX = e.target.getAttribute('data-pos-x')
+    const posY = e.target.getAttribute('data-pos-y')
+
+    const targetIsACell = posX && posY
+    if (!targetIsACell) return
+
+    const allCells = nodes.getAllCells()
+    const cellsArr = [...allCells]
+
+    cellsArr.forEach((cell) => {
+      const currCellPosX = cell.getAttribute('data-pos-x')
+      const currCellPosY = cell.getAttribute('data-pos-y')
+
+      if (currCellPosX === posX && currCellPosY === posY) {
+        const isClicked =
+          cell.getAttribute('data-clicked') === 'true' ? true : false
+        cell.setAttribute('data-clicked', !isClicked)
+      } else cell.setAttribute('data-clicked', false)
+    })
+  }
+
   return {
     cellDOM: null,
     createCellDOM: function () {
@@ -52,6 +74,7 @@ function cellDOMFactory(cellData, posX, posY) {
       this.addAttribute()
 
       this.cellDOM.addEventListener('mouseenter', handleCellHovering)
+      this.cellDOM.addEventListener('click', handleClick)
     },
 
     addCellClasses: function () {
@@ -67,6 +90,7 @@ function cellDOMFactory(cellData, posX, posY) {
       this.cellDOM.setAttribute('data-pos-x', posX)
       this.cellDOM.setAttribute('data-pos-y', posY)
       this.cellDOM.setAttribute('data-canChange', cellData.canChange)
+      this.cellDOM.setAttribute('data-clicked', false)
     },
   }
 }

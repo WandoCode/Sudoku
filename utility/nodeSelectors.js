@@ -26,6 +26,12 @@ const nodeSelectors = () => {
 
   const getAllCells = () => document.getElementsByClassName('board__cell')
 
+  const getKeyboardContainer = () =>
+    document.getElementsByClassName('keyboard-container')[0]
+
+  const getClickedCell = () =>
+    document.querySelector('.board__cell[data-clicked="true"]')
+
   return {
     getBody,
     getGameContainer,
@@ -36,6 +42,8 @@ const nodeSelectors = () => {
     getSelect,
     getDifficultyOptionSelect,
     getAllCells,
+    getKeyboardContainer,
+    getClickedCell,
   }
 }
 

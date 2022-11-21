@@ -1,9 +1,11 @@
 import nodeSelectors from '../utility/nodeSelectors.js'
 import gridDOMFactory from './gridDOMFactory.js'
+import keyboardDOMFactory from './keyboardDOMFactory.js'
 import selectFactory from './selectFactory.js'
 
 function UIFactory(game) {
   const nodes = nodeSelectors()
+
   const drawGrid = () => {
     const container = nodes.getGameContainer()
     container.innerHTML = ''
@@ -47,10 +49,16 @@ function UIFactory(game) {
     container.appendChild(selectFactory(difficulties).createCustomSelect())
   }
 
+  const drawKeyboard = () => {
+    const container = nodes.getKeyboardContainer()
+    container.appendChild(keyboardDOMFactory(game).createKeyboardDOM())
+  }
+
   const drawPage = () => {
     drawGrid()
     drawNewGameBtn()
     drawSelectDifficulty()
+    drawKeyboard()
   }
 
   return { drawPage }
