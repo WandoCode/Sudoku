@@ -61,45 +61,50 @@ function gameManager() {
       gStore.saveGame(this.id, this.gridCurrState)
     },
 
-    updateCell: function (cellPosX, cellPosY, newValue, option = []) {
+    updateCell: function (cellPosX, cellPosY, newValue, options = []) {
+      const cellPosXInt = parseInt(cellPosX)
+      const cellPosYInt = parseInt(cellPosY)
+      const newValueInt = parseInt(newValue)
+
       this.gridCurrState = this.gridCurrState.map((cell) => {
         const cellIsValid =
-          cell.position.x == cellPosX &&
-          cell.position.y == cellPosY &&
+          cell.position.x === cellPosXInt &&
+          cell.position.y === cellPosYInt &&
           cell.canChange
 
         if (cellIsValid) {
-          if (option.includes('saveForUndo'))
+          if (!options.includes('skipSaveForUndo'))
             this.precStates.push({
-              x: cellPosX,
-              y: cellPosY,
+              x: cellPosXInt,
+              y: cellPosYInt,
               value: cell.value,
             })
 
-          if (option.includes('canNotChange')) cell.canChange = false
+          if (options.includes('canNotChange')) cell.canChange = false
 
-          cell.value = newValue
+          cell.value = newValueInt
         }
         return cell
       })
 
+      UIFactory().redrawCellValue(
+        String(cellPosXInt),
+        String(cellPosYInt),
+        String(newValueInt),
+        options
+      )
       this.saveGame()
     },
+
     undo: function () {
       const lastStateChange = this.precStates.pop()
-
       if (!lastStateChange) return
 
       this.updateCell(
-        lastStateChange.x,
-        lastStateChange.y,
-        lastStateChange.value,
-        ['saveForUndo']
-      )
-      UIFactory().redrawCellValue(
-        lastStateChange.x,
-        lastStateChange.y,
-        lastStateChange.value
+        String(lastStateChange.x),
+        String(lastStateChange.y),
+        String(lastStateChange.value),
+        ['skipSaveForUndo']
       )
     },
 
@@ -119,18 +124,12 @@ function gameManager() {
         hintCell.position.x,
         hintCell.position.y,
         hintCell.value,
-        ['canNotChange']
-      )
-
-      UIFactory().redrawCellValue(
-        String(hintCell.position.x),
-        String(hintCell.position.y),
-        String(hintCell.value),
-        ['canNotChange']
+        ['canNotChange', 'skipSaveForUndo']
       )
     },
-    getGameErrors: function () {
+    showGameErrors: function () {
       let errors = []
+
       this.gridCurrState.forEach((currCell, index) => {
         const solutionValue = parseInt(this.gridSolution[index].value)
         const currValue = parseInt(currCell.value) || null

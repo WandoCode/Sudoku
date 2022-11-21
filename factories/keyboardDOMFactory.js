@@ -4,6 +4,19 @@ import UIFactory from './UIFactory.js'
 function keyboardDOMFactory(game) {
   const nodes = nodeSelectors()
 
+  const createShowErrorsKey = () => {
+    const keyboardShowErrors = document.createElement('button')
+    keyboardShowErrors.classList.add('keyboard__show-errors')
+
+    keyboardShowErrors.value = 'show-errors'
+    keyboardShowErrors.innerText = 'Show Errors'
+    keyboardShowErrors.onclick = handleShowErrors
+    return keyboardShowErrors
+  }
+
+  const handleShowErrors = () => {
+    game.showGameErrors()
+  }
   const createHintKey = () => {
     const keyboardHint = document.createElement('button')
     keyboardHint.classList.add('keyboard__undo')
@@ -35,6 +48,7 @@ function keyboardDOMFactory(game) {
     container.classList.add('keyboard__specials')
     container.appendChild(createUndoKey())
     container.appendChild(createHintKey())
+    container.appendChild(createShowErrorsKey())
 
     return container
   }
@@ -77,8 +91,6 @@ function keyboardDOMFactory(game) {
     const clickedCellCanChange = clickedCell.getAttribute('data-canChange')
 
     if (clickedCellCanChange === 'false') return
-
-    clickedCell.innerText = value !== '0' ? value : ''
 
     game.updateCell(clickedCellPosX, clickedCellPosY, value)
   }

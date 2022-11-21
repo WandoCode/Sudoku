@@ -73,20 +73,21 @@ function UIFactory(game) {
         if (options.includes('canNotChange')) {
           cell.setAttribute('data-canChange', 'false')
         }
-        cell.innerText = value !== '0' ? value : ''
+        cell.innerText = value === '0' || isNaN(value) ? '' : value
+        cell.classList.remove('cell--error')
       }
       return
     })
   }
 
   const drawErrors = (errors) => {
-    console.log(errors)
     const allCells = nodes.getAllCells()
     const cellsArr = [...allCells]
 
     cellsArr.forEach((cell) => {
       const currCellPosX = cell.getAttribute('data-pos-x')
       const currCellPosY = cell.getAttribute('data-pos-y')
+
       errors.forEach((error) => {
         if (
           parseInt(currCellPosX) === error.x &&

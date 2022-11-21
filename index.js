@@ -8,5 +8,3 @@ const gameLoaded = game.loadGame()
 if (!gameLoaded) game.launchNewGame('easy')
 
 UIGenerator.drawPage()
-
-game.getGameErrors()
