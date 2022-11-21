@@ -3,17 +3,13 @@ import gameStore from '../store/game.store.js'
 import solutionStore from '../store/solution.store.js'
 
 function gameManager() {
-  let gridCurrState = []
-  let gridSolution = []
-  let id
-
   const gStore = gameStore()
   const sStore = solutionStore()
 
   return {
-    gridCurrState,
-    gridSolution,
-    id,
+    gridCurrState: [],
+    gridSolution: [],
+    id: null,
     launchNewGame: function (difficulty) {
       const datasMaker = datasFactory()
 

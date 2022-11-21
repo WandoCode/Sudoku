@@ -1,6 +1,10 @@
+import nodeSelectors from '../utility/nodeSelectors.js'
+
 function cellDOMFactory(cellData, posX, posY) {
+  const nodes = nodeSelectors()
+
   const addClassToCellsOnSameRowColumn = (posX, posY) => {
-    const allCells = document.getElementsByClassName('board__cell')
+    const allCells = nodes.getAllCells()
 
     const cellsArr = [...allCells]
     cellsArr.forEach((cell) => {
@@ -25,8 +29,9 @@ function cellDOMFactory(cellData, posX, posY) {
   }
 
   const handleCellLeave = () => {
-    const allCells = document.getElementsByClassName('board__cell')
+    const allCells = nodes.getAllCells()
     const cellsArr = [...allCells]
+
     cellsArr.forEach((cell) => {
       const currCellPosX = cell.getAttribute('data-pos-x')
       const currCellPosY = cell.getAttribute('data-pos-y')

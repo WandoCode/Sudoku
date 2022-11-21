@@ -1,9 +1,11 @@
+import nodeSelectors from '../utility/nodeSelectors.js'
 import gridDOMFactory from './gridDOMFactory.js'
 import selectFactory from './selectFactory.js'
 
 function UIFactory(game) {
+  const nodes = nodeSelectors()
   const drawGrid = () => {
-    const container = document.getElementsByClassName('game-container')[0]
+    const container = nodes.getGameContainer()
     container.innerHTML = ''
 
     const grid = gridDOMFactory(game.id, game.gridCurrState)
@@ -15,7 +17,7 @@ function UIFactory(game) {
   }
 
   const drawNewGameBtn = () => {
-    const container = document.getElementsByClassName('reset-btn-container')[0]
+    const container = nodes.getResetBtnContainer()
 
     const btn = document.createElement('button')
     btn.onclick = handleNewGameBtn
@@ -25,8 +27,8 @@ function UIFactory(game) {
   }
 
   const handleNewGameBtn = () => {
-    const selectEl = document.getElementById('select-difficulty')
-    console.log(selectEl)
+    const selectEl = nodes.getSelectDifficulty()
+
     const difficulty = selectEl.value
 
     game.launchNewGame(difficulty)
@@ -34,7 +36,7 @@ function UIFactory(game) {
   }
 
   const drawSelectDifficulty = () => {
-    const container = document.getElementsByClassName('difficulty-container')[0]
+    const container = nodes.getDifficultyContainer()
 
     const difficulties = {
       easy: 'Facile',

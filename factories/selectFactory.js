@@ -1,4 +1,8 @@
+import nodeSelectors from '../utility/nodeSelectors.js'
+
 function selectFactory(options) {
+  const nodes = nodeSelectors()
+
   const getSelectDOM = (currentValue) => {
     const select = document.createElement('input')
     select.type = 'checkbox'
@@ -36,7 +40,7 @@ function selectFactory(options) {
 
   const openOptionsHandler = () => {
     const body = document.getElementsByTagName('body')[0]
-    const optionsDOM = document.getElementsByClassName('options')[0]
+    const optionsDOM = nodes.getDifficultyOptions()
 
     optionsDOM.style.display = 'block'
 
@@ -44,9 +48,9 @@ function selectFactory(options) {
   }
 
   const closeOptionsHandler = () => {
-    const select = document.getElementById('select-difficulty')
-    const optionsDOM = document.getElementsByClassName('options')[0]
-    const body = document.getElementsByTagName('body')[0]
+    const select = nodes.getSelectDifficulty()
+    const optionsDOM = nodes.getDifficultyOptions()
+    const body = nodes.getBody()
 
     optionsDOM.style.display = 'none'
     select.checked = false
@@ -55,7 +59,7 @@ function selectFactory(options) {
   }
 
   const clickOutsideSelectHandler = (e) => {
-    const selectLabel = document.getElementById('select')
+    const selectLabel = nodes.getSelect()
     if (e.target.id !== selectLabel.id) closeOptionsHandler()
   }
 
@@ -68,7 +72,7 @@ function selectFactory(options) {
   }
 
   const updateOptionsClasses = function (currentValue) {
-    const selectOptions = document.getElementsByClassName('option-select')
+    const selectOptions = nodes.getDifficultyOptionSelect()
 
     const optionsArr = [...selectOptions]
 
@@ -82,8 +86,8 @@ function selectFactory(options) {
   }
 
   const redraw = function (currentValue) {
-    const select = document.getElementById('select-difficulty')
-    const selectLabel = document.getElementById('select')
+    const select = nodes.getSelectDifficulty()
+    const selectLabel = nodes.getSelect()
 
     selectLabel.innerText = options[currentValue]
     select.value = currentValue
