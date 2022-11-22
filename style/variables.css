@@ -2,6 +2,9 @@
   --font-main: 'Montserrat', sans-serif;
 
   --clr-accent-400: #f95656;
+  --clr-accent-600: #fccb77;
+  --clr-accent-600-svg: invert(82%) sepia(29%) saturate(756%) hue-rotate(338deg)
+    brightness(102%) contrast(98%);
 
   --clr-main-200: #75b8fd;
   --clr-main-300: #518df1;
@@ -12,5 +15,9 @@
   --clr-neutral-100: #ffffff;
   --clr-neutral-200: #f1f7ff;
   --clr-neutral-300: #e2e7f6;
+  --clr-neutral-700: rgb(182, 182, 182);
+  --clr-neutral-800: rgb(68, 68, 68);
   --clr-neutral-900: #000;
+
+  --cell-size: 45px;
 }

@@ -133,7 +133,6 @@ function gameManager() {
       this.gridCurrState.forEach((currCell, index) => {
         const solutionValue = parseInt(this.gridSolution[index].value)
         const currValue = parseInt(currCell.value) || null
-        console.log(currValue)
         if (solutionValue !== currValue && currValue !== null)
           errors.push({ x: currCell.position.x, y: currCell.position.y })
       })

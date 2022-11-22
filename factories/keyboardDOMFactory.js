@@ -1,28 +1,40 @@
 import nodeSelectors from '../utility/nodeSelectors.js'
-import UIFactory from './UIFactory.js'
 
 function keyboardDOMFactory(game) {
   const nodes = nodeSelectors()
 
+  const createImg = (path, altText) => {
+    const img = document.createElement('img')
+    img.src = path
+    img.alt = altText
+
+    return img
+  }
   const createShowErrorsKey = () => {
     const keyboardShowErrors = document.createElement('button')
-    keyboardShowErrors.classList.add('keyboard__show-errors')
+    const errorImg = createImg('../assets/check.svg', 'Check for errors')
 
-    keyboardShowErrors.value = 'show-errors'
-    keyboardShowErrors.innerText = 'Show Errors'
+    keyboardShowErrors.appendChild(errorImg)
+
+    keyboardShowErrors.classList.add('button--img', 'keyboard__show-errors')
+
     keyboardShowErrors.onclick = handleShowErrors
+
     return keyboardShowErrors
   }
 
   const handleShowErrors = () => {
     game.showGameErrors()
   }
+
   const createHintKey = () => {
     const keyboardHint = document.createElement('button')
-    keyboardHint.classList.add('keyboard__undo')
+    const hintImg = createImg('../assets/hint.svg', 'Tip')
 
-    keyboardHint.value = 'hint'
-    keyboardHint.innerText = 'Hint'
+    keyboardHint.appendChild(hintImg)
+
+    keyboardHint.classList.add('button--img', 'keyboard__undo')
+
     keyboardHint.onclick = handleHint
     return keyboardHint
   }
@@ -32,11 +44,14 @@ function keyboardDOMFactory(game) {
   }
   const createUndoKey = () => {
     const keyboardUndo = document.createElement('button')
-    keyboardUndo.classList.add('keyboard__undo')
+    const undoImg = createImg('../assets/undo.svg', 'Undo')
 
-    keyboardUndo.value = 'undo'
-    keyboardUndo.innerText = 'Undo'
+    keyboardUndo.appendChild(undoImg)
+
+    keyboardUndo.classList.add('button--img', 'keyboard__undo')
+
     keyboardUndo.onclick = hanleUndo
+
     return keyboardUndo
   }
 
