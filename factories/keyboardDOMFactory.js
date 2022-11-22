@@ -60,7 +60,7 @@ function keyboardDOMFactory(game) {
     for (let i = 0; i < 10; i++) {
       const keyboardKey = document.createElement('button')
 
-      keyboardKey.value = i
+      keyboardKey.value = i === 0 ? null : i
       keyboardKey.innerText = i === 0 ? null : i
       keyboardKey.onclick = handleClick
 

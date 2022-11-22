@@ -92,3 +92,7 @@
 .board .in-cross {
   background-color: #f1f7ff;
 }
+
+.board .cell--error {
+  color: red;
+}
