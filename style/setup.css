@@ -6,7 +6,7 @@ input {
 body {
   height: 100vh;
 
-  background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-500));
+  background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-600));
 }
 
 main {

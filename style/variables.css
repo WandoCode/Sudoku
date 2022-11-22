@@ -1,14 +1,16 @@
 :root {
   --font-main: 'Montserrat', sans-serif;
-  --clr-primary-800: #004a94;
-  --clr-primary-400: #53a9ff;
-  --clr-primary-200: #a7d3ff;
+
+  --clr-accent-400: #f95656;
 
   --clr-main-200: #75b8fd;
-  --clr-main-300: #5390f2;
+  --clr-main-300: #518df1;
   --clr-main-400: #2f60c9;
-  --clr-main-500: #4a43a4;
+  --clr-main-500: #2c4599;
+  --clr-main-600: #4a43a4;
 
   --clr-neutral-100: #ffffff;
-  --clr-neutral-200: #e2e7f6;
+  --clr-neutral-200: #f1f7ff;
+  --clr-neutral-300: #e2e7f6;
+  --clr-neutral-900: #000;
 }
