@@ -5,16 +5,23 @@ input {
 
 body {
   height: 100vh;
-
   background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-600));
+  user-select: none;
+  display: grid;
 }
 
 main {
   width: 50%;
-  height: 100%;
+  min-width: min-content;
+  height: 85%;
   margin: auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  justify-items: center;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 35em) {
+  main {
+    height: 100%;
+  }
 }

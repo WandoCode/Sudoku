@@ -12,7 +12,7 @@ function cellDOMFactory(cellData, posX, posY) {
       const currCellPosY = cell.getAttribute('data-pos-y')
 
       if (currCellPosX === posX || currCellPosY === posY)
-        cell.classList.add('in-cross')
+        cell.classList.add('board__cell-in-cross')
     })
   }
 
@@ -37,7 +37,7 @@ function cellDOMFactory(cellData, posX, posY) {
       const currCellPosY = cell.getAttribute('data-pos-y')
 
       if (currCellPosX !== posX && currCellPosY !== posY)
-        return cell.classList.remove('in-cross')
+        return cell.classList.remove('board__cell-in-cross')
     })
   }
 

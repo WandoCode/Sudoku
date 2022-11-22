@@ -7,24 +7,28 @@ function UIFactory(game) {
   const nodes = nodeSelectors()
 
   const drawGrid = () => {
-    const container = nodes.getGameContainer()
-    container.innerHTML = ''
+    const prevChild = nodes.getOptionsContainer()
 
     const grid = gridDOMFactory(game.gridCurrState)
     grid.createBoard()
 
     const board = grid.board
 
-    container.appendChild(board)
+    const remainingBoard = nodes.getBoard()
+    remainingBoard?.remove()
+
+    prevChild.after(board)
   }
 
   const drawNewGameBtn = () => {
-    const container = nodes.getResetBtnContainer()
+    const container = nodes.getOptionsContainer()
 
     const btn = document.createElement('button')
+    btn.innerText = 'Nouvelle partie'
+    btn.classList.add('btn', 'btn--primary')
+
     btn.onclick = handleNewGameBtn
 
-    btn.innerText = 'Nouvelle partie'
     container.appendChild(btn)
   }
 
@@ -38,7 +42,7 @@ function UIFactory(game) {
   }
 
   const drawSelectDifficulty = () => {
-    const container = nodes.getDifficultyContainer()
+    const container = nodes.getOptionsContainer()
 
     const difficulties = {
       easy: 'Facile',
@@ -50,7 +54,7 @@ function UIFactory(game) {
   }
 
   const drawKeyboard = () => {
-    const container = nodes.getKeyboardContainer()
+    const container = nodes.getMain()
     container.appendChild(keyboardDOMFactory(game).createKeyboardDOM())
   }
 
@@ -93,7 +97,7 @@ function UIFactory(game) {
           parseInt(currCellPosX) === error.x &&
           parseInt(currCellPosY) === error.y
         ) {
-          cell.classList.add('cell--error')
+          cell.classList.add('board__cell--error')
         }
       })
     })

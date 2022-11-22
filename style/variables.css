@@ -2,10 +2,12 @@
   --font-main: 'Montserrat', sans-serif;
 
   --clr-accent-400: #f95656;
-  --clr-accent-600: #fccb77;
+  --clr-accent-600: #fff8ec;
+  --clr-accent-650: #ffffff;
   --clr-accent-600-svg: invert(82%) sepia(29%) saturate(756%) hue-rotate(338deg)
     brightness(102%) contrast(98%);
 
+  --clr-main-100: #9fcfff;
   --clr-main-200: #75b8fd;
   --clr-main-300: #518df1;
   --clr-main-400: #2f60c9;
@@ -20,4 +22,29 @@
   --clr-neutral-900: #000;
 
   --cell-size: 45px;
+
+  --fs-200: 1rem;
+  --fs-300: 1.25rem;
+  --fs-400: 1.5rem;
+  --fs-600: 1.75rem;
+  --fs-700: 2rem;
+  --fs-800: 2.5rem;
+
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-bold: 500;
+  --fw-bolder: 600;
+}
+
+@media (max-width: 35em) {
+  :root {
+    --cell-size: 35px;
+
+    --fs-200: 0.75rem;
+    --fs-300: 1rem;
+    --fs-400: 1.25rem;
+    --fs-600: 1.75rem;
+    --fs-700: 2rem;
+    --fs-800: 2.5rem;
+  }
 }

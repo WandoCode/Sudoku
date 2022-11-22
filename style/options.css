@@ -1,0 +1,10 @@
+.game-options-container {
+  display: inline-flex;
+  gap: 3%;
+  justify-content: center;
+  width: 100%;
+}
+
+.game-options-container > * {
+  flex-basis: 50%;
+}

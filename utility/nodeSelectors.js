@@ -1,20 +1,14 @@
-// getBody
-// getAllCells
-// etc.
-
 const nodeSelectors = () => {
   const getBody = () => document.getElementsByTagName('body')[0]
 
-  const getGameContainer = () =>
-    document.getElementsByClassName('game-container')[0]
+  const getMain = () => document.getElementsByTagName('main')[0]
 
-  const getResetBtnContainer = () =>
-    document.getElementsByClassName('reset-btn-container')[0]
+  const getBoard = () => document.getElementsByClassName('board')[0]
+
+  const getOptionsContainer = () =>
+    document.getElementsByClassName('game-options-container')[0]
 
   const getSelectDifficulty = () => document.getElementById('select-difficulty')
-
-  const getDifficultyContainer = () =>
-    document.getElementsByClassName('difficulty-container')[0]
 
   const getDifficultyOptions = () =>
     document.getElementsByClassName('options')[0]
@@ -26,23 +20,19 @@ const nodeSelectors = () => {
 
   const getAllCells = () => document.getElementsByClassName('board__cell')
 
-  const getKeyboardContainer = () =>
-    document.getElementsByClassName('keyboard-container')[0]
-
   const getClickedCell = () =>
     document.querySelector('.board__cell[data-clicked="true"]')
 
   return {
     getBody,
-    getGameContainer,
-    getResetBtnContainer,
+    getMain,
+    getBoard,
+    getOptionsContainer,
     getSelectDifficulty,
-    getDifficultyContainer,
     getDifficultyOptions,
     getSelect,
     getDifficultyOptionSelect,
     getAllCells,
-    getKeyboardContainer,
     getClickedCell,
   }
 }

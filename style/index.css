@@ -2,5 +2,7 @@
 @import 'variables.css';
 @import 'setup.css';
 @import 'button.css';
+@import 'keyboard.css';
 @import 'board.css';
+@import 'options.css';
 @import 'select.css';

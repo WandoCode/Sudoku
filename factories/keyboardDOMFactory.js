@@ -16,7 +16,11 @@ function keyboardDOMFactory(game) {
 
     keyboardShowErrors.appendChild(errorImg)
 
-    keyboardShowErrors.classList.add('button--img', 'keyboard__show-errors')
+    keyboardShowErrors.classList.add(
+      'btn',
+      'btn--secondary',
+      'keyboard__show-errors'
+    )
 
     keyboardShowErrors.onclick = handleShowErrors
 
@@ -33,7 +37,7 @@ function keyboardDOMFactory(game) {
 
     keyboardHint.appendChild(hintImg)
 
-    keyboardHint.classList.add('button--img', 'keyboard__undo')
+    keyboardHint.classList.add('btn', 'btn--secondary', 'keyboard__undo')
 
     keyboardHint.onclick = handleHint
     return keyboardHint
@@ -48,7 +52,7 @@ function keyboardDOMFactory(game) {
 
     keyboardUndo.appendChild(undoImg)
 
-    keyboardUndo.classList.add('button--img', 'keyboard__undo')
+    keyboardUndo.classList.add('btn', 'btn--secondary', 'keyboard__undo')
 
     keyboardUndo.onclick = hanleUndo
 
@@ -74,7 +78,7 @@ function keyboardDOMFactory(game) {
 
     for (let i = 0; i < 10; i++) {
       const keyboardKey = document.createElement('button')
-
+      keyboardKey.classList.add('btn', 'btn--key')
       keyboardKey.value = i === 0 ? null : i
       keyboardKey.innerText = i === 0 ? null : i
       keyboardKey.onclick = handleClick

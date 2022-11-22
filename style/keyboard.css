@@ -1,0 +1,19 @@
+.keyboard {
+  display: grid;
+  gap: 3rem;
+}
+
+.keyboard__value {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.keyboard__value button {
+  height: var(--cell-size);
+  aspect-ratio: 3 / 4;
+}
+
+.keyboard__specials {
+  display: flex;
+  justify-content: space-between;
+}
