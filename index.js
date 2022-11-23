@@ -1,6 +1,6 @@
 import UIFactory from './factories/UIFactory.js'
 import gameManager from './feature/GameManager.js'
-
+import './style/index.css'
 const game = gameManager()
 const UIGenerator = UIFactory(game)
 

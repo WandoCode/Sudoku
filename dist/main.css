@@ -1,0 +1,464 @@
+/*!*******************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/reset.css ***!
+  \*******************************************************************/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+table {
+  border-collapse: collapse;
+}
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*!***********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/variables.css ***!
+  \***********************************************************************/
+:root {
+  --font-main: 'Montserrat', sans-serif;
+
+  --clr-accent-400: #f95656;
+  --clr-accent-600: #fff8ec;
+  --clr-accent-650: #ffffff;
+  --clr-accent-600-svg: invert(82%) sepia(29%) saturate(756%) hue-rotate(338deg)
+    brightness(102%) contrast(98%);
+
+  --clr-main-100: #9fcfff;
+  --clr-main-200: #75b8fd;
+  --clr-main-300: #518df1;
+  --clr-main-400: #2f60c9;
+  --clr-main-500: #2c4599;
+  --clr-main-600: #4a43a4;
+
+  --clr-neutral-100: #ffffff;
+  --clr-neutral-200: #f1f7ff;
+  --clr-neutral-300: #e2e7f6;
+  --clr-neutral-700: rgb(182, 182, 182);
+  --clr-neutral-800: rgb(68, 68, 68);
+  --clr-neutral-900: #000;
+
+  --cell-size: 45px;
+
+  --fs-200: 1rem;
+  --fs-300: 1.25rem;
+  --fs-400: 1.5rem;
+  --fs-600: 1.75rem;
+  --fs-700: 2rem;
+  --fs-800: 2.5rem;
+
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-bold: 500;
+  --fw-bolder: 600;
+}
+
+@media (max-width: 35em) {
+  :root {
+    --cell-size: 35px;
+
+    --fs-200: 0.75rem;
+    --fs-300: 1rem;
+    --fs-400: 1.25rem;
+    --fs-600: 1.75rem;
+    --fs-700: 2rem;
+    --fs-800: 2.5rem;
+  }
+}
+
+/*!*******************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/setup.css ***!
+  \*******************************************************************/
+body,
+input {
+  font-family: var(--font-main);
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-600));
+  user-select: none;
+  display: grid;
+}
+
+main {
+  width: 50%;
+  min-width: min-content;
+  height: 85%;
+  margin: auto;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 35em) {
+  main {
+    height: 100%;
+  }
+}
+
+/*!********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/button.css ***!
+  \********************************************************************/
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0px var(--clr-neutral-800);
+  font-size: var(--fs-300);
+  transition: 0.05s;
+  height: var(--cell-size);
+}
+
+.btn:hover {
+  scale: 115%;
+}
+
+.btn:active {
+  translate: 0 -10%;
+}
+
+.btn--primary {
+  font-weight: var(--fw-bolder);
+
+  color: var(--clr-neutral-200);
+  background: linear-gradient(
+    125deg,
+    var(--clr-main-200) 0%,
+    var(--clr-main-300) 100%
+  );
+}
+
+.btn--primary:active {
+  translate: none;
+}
+.btn--primary:hover {
+  scale: 1;
+  color: var(--clr-main-500);
+}
+
+.btn--secondary {
+  width: calc(2 * var(--cell-size));
+  padding-block: 0.5rem;
+  background: none;
+  box-shadow: none;
+  filter: var(--clr-accent-600-svg);
+}
+
+@media (max-width: 35em) {
+  .btn--secondary {
+    padding-block: 0.25rem;
+  }
+}
+.btn--secondary:hover {
+  background: none;
+}
+
+.btn--secondary img {
+  display: inline;
+  height: 100%;
+}
+
+.btn--key {
+  font-weight: var(--fw-bold);
+
+  background-color: var(--clr-neutral-100);
+}
+
+.btn--key:active {
+  translate: 0 -10%;
+}
+
+/*!**********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/keyboard.css ***!
+  \**********************************************************************/
+.keyboard {
+  display: grid;
+  gap: 3rem;
+}
+
+.keyboard__value {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.keyboard__value button {
+  height: var(--cell-size);
+  aspect-ratio: 3 / 4;
+}
+
+.keyboard__specials {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*!*******************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/board.css ***!
+  \*******************************************************************/
+.board {
+  position: relative;
+
+  box-shadow: 0px 5px 10px 0px var(--clr-main-500);
+  font-size: var(--fs-400);
+}
+
+.board::before,
+.board::after {
+  content: '';
+  position: absolute;
+
+  height: 100%;
+  width: 2px;
+
+  background-color: var(--clr-main-500);
+}
+
+.board::before {
+  left: 32.85%;
+}
+
+.board::after {
+  top: 0;
+  left: 66.2%;
+
+  z-index: 0;
+}
+
+.board__row {
+  display: flex;
+}
+
+.board__row:is(:nth-child(3n), :nth-child(9n)) {
+  border-bottom: 2px solid var(--clr-main-500);
+}
+
+.board__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--cell-size);
+  height: var(--cell-size);
+
+  border: 1px solid var(--clr-neutral-300);
+  background-color: var(--clr-neutral-100);
+}
+
+.board__cell--error {
+  color: var(--clr-accent-400);
+}
+
+.board__cell[data-clicked='true'] {
+  overflow: hidden;
+
+  z-index: 1;
+
+  scale: 115%;
+  color: var(--clr-neutral-100);
+  font-weight: var(--fw-bold);
+
+  background: linear-gradient(
+    125deg,
+    var(--clr-main-200) 0%,
+    var(--clr-main-300) 100%
+  );
+
+  border: none;
+  border-radius: 6px 6px 5px 6px;
+  box-shadow: 0px 0px 10px -2px var(--clr-main-500);
+}
+
+.board__cell[data-clicked='true']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+
+  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.541);
+}
+
+.board__cell:nth-child(3n) {
+  border-right: 2px solid var(--clr-main-500);
+}
+
+.board__cell:is(:nth-child(9n), :nth-child(3n)[data-clicked='true']) {
+  border-right: none;
+}
+
+.board__cell[data-canChange='false'] {
+  font-weight: var(--fw-bold);
+  color: var(--clr-main-300);
+}
+
+.board__cell-in-cross {
+  background-color: var(--clr-neutral-200);
+}
+
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/options.css ***!
+  \*********************************************************************/
+.game-options-container {
+  display: inline-flex;
+  gap: 3%;
+  justify-content: center;
+  width: 100%;
+}
+
+.game-options-container > * {
+  flex-basis: 50%;
+}
+
+/*!********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/select.css ***!
+  \********************************************************************/
+.select-container {
+  position: relative;
+}
+
+.select-container input {
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.select-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: var(--cell-size);
+
+  padding-block: 0.2rem;
+
+  font-size: var(--fs-300);
+  font-weight: var(--fw-normal);
+  color: var(--clr-neutral-200);
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    125deg,
+    var(--clr-main-200) 0%,
+    var(--clr-main-300) 100%
+  );
+
+  border-radius: 3px 3px;
+}
+
+.select-container label:hover {
+  background-color: var(--clr-main-100);
+  color: var(--clr-main-500);
+}
+
+.select-container ul {
+  display: none;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border-radius: 0 0 3px 3px;
+}
+
+.select-container li {
+  padding-block: 0.2rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--clr-main-200);
+}
+
+.select-container li:hover {
+  background-color: var(--clr-main-300);
+}
+
+.select-container #select-difficulty:checked ~ label {
+  background: var(--clr-main-200);
+  color: var(--clr-main-500);
+  border-radius: 3px 3px 0 0;
+}
+
+.select-container #select-difficulty:checked ~ ul {
+  display: block;
+  z-index: 2;
+}
+
+/*!*******************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/index.css ***!
+  \*******************************************************************/
+
+
