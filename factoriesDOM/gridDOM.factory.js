@@ -1,4 +1,4 @@
-import rowFactory from './rowDOMFactory.js'
+import rowFactory from './rowDOM.factory.js'
 
 function gridDOMFactory(gridDatas) {
   return {

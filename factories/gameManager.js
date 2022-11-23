@@ -1,6 +1,6 @@
-import datasFactory from '../factories/datasFactory.js'
-import { getCellIndex, getRandomNbr } from '../factories/helpers.js'
-import UIFactory from '../factories/UIFactory.js'
+import datasFactory from './datas.factory.js'
+import { getCellIndex, getRandomNbr } from '../utility/helpers.js'
+import UIFactory from '../factoriesDOM/UI.factory.js'
 import gameStore from '../store/game.store.js'
 import solutionStore from '../store/solution.store.js'
 

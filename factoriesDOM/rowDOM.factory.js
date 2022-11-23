@@ -1,4 +1,4 @@
-import cellDOMFactory from './cellDOMFactory.js'
+import cellDOMFactory from './cellDOM.factory.js'
 
 function rowDOMFactory(cellDatas) {
   const createRow = (posY) => {

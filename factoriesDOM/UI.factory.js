@@ -1,7 +1,7 @@
 import nodeSelectors from '../utility/nodeSelectors.js'
-import gridDOMFactory from './gridDOMFactory.js'
-import keyboardDOMFactory from './keyboardDOMFactory.js'
-import selectFactory from './selectFactory.js'
+import gridDOMFactory from './gridDOM.factory.js'
+import keyboardDOMFactory from './keyboardDOM.factory.js'
+import selectFactory from './selectDOM.factory.js'
 
 function UIFactory(game) {
   const nodes = nodeSelectors()

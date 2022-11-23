@@ -1,6 +1,6 @@
-import cellFactory from './cellFactory.js'
-import checkFactory from './checkFactory.js'
-import { getCellIndex, getRandomNbr } from './helpers.js'
+import cellFactory from './cell.factory.js'
+import checkFactory from './check.factory.js'
+import { getCellIndex, getRandomNbr } from '../utility/helpers.js'
 
 function datasFactory() {
   const createEmptyCell = (posX, posY) => {
@@ -146,7 +146,7 @@ function datasFactory() {
 
     makeGridPlayable: function (difficulty) {
       // {difficulty: # of number that stay on the grid}
-      const difficultiesInterface = { easy: 15, medium: 11, hard: 7 }
+      const difficultiesInterface = { easy: 25, medium: 21, hard: 17 }
 
       const quantityOfCellsLeftOnGrid = difficultiesInterface[difficulty]
 

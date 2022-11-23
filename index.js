@@ -1,5 +1,5 @@
-import UIFactory from './factories/UIFactory.js'
-import gameManager from './feature/GameManager.js'
+import UIFactory from './factoriesDOM/UI.factory.js'
+import gameManager from './factories/gameManager.js'
 import './style/index.css'
 
 const game = gameManager()
