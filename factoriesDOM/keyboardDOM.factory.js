@@ -65,6 +65,7 @@ function keyboardDOMFactory(game) {
   const hanleUndo = () => {
     game.undo()
   }
+
   const createSpecialKeys = () => {
     const container = document.createElement('div')
     container.classList.add('keyboard__specials')

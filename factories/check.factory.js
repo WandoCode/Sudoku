@@ -44,7 +44,7 @@ function checkFactory(gridDatas) {
   const haveOnlyUniqueValues = (arrValues) => {
     let ans = true
     for (let i = 1; i <= 10; i++) {
-      const filteredArr = arrValues.filter((val) => {
+      const filteredArr = arrValues.some((val) => {
         return val === i
       })
 
@@ -57,7 +57,7 @@ function checkFactory(gridDatas) {
   }
 
   const getSquarePosition = (posX, posY) => {
-    // For pos =[0,5] it gives thoses posible values: 2, 5 and 8
+    // For pos =[0,9] it gives thoses posible values: 2, 5 and 8
     let posXMax = Math.floor(posX / 3) * 3 + 2
     let posYMax = Math.floor(posY / 3) * 3 + 2
 

@@ -1,18 +1,29 @@
-import cellFactory from './cell.factory.js'
 import checkFactory from './check.factory.js'
 import { getCellIndex, getRandomNbr } from '../utility/helpers.js'
 
 function datasFactory() {
   const createEmptyCell = (posX, posY) => {
-    const emptyCell = cellFactory(null, posX, posY, true)
-    return emptyCell
+    return { value: null, position: { x: posX, y: posY }, canChange: true }
   }
 
-  const getRandomArrValue = (arr) => {
+  const getRandomValueInArr = (arr) => {
     return arr[getRandomNbr(arr.length - 1)]
   }
 
-  const getRandomPositions = (nbr) => {
+  const getNextCellPositions = (posX, posY) => {
+    let nextPosX = posX
+    let nextPosY = posY
+
+    nextPosX++
+
+    if (nextPosX === 9) {
+      nextPosX = 0
+      nextPosY++
+    }
+    return { nextPosX, nextPosY }
+  }
+
+  const getUniqueRandomPositions = (nbr) => {
     const maxPos = { x: 8, y: 8 }
 
     const resArr = []
@@ -43,6 +54,7 @@ function datasFactory() {
     getGrid: function () {
       return JSON.parse(JSON.stringify(this.grid))
     },
+
     getRandomFullValidGrid: function () {
       let searchingValidValues = true
 
@@ -97,14 +109,11 @@ function datasFactory() {
       let nextPosY = currPosY
 
       while (nextPosX < 9 && nextPosY < 9) {
-        nextPosX++
+        let nextPosition = getNextCellPositions(nextPosX, nextPosY)
+        nextPosX = nextPosition.nextPosX
+        nextPosY = nextPosition.nextPosY
 
-        if (nextPosX === 9) {
-          nextPosX = 0
-          nextPosY++
-
-          if (nextPosY === 9) break // we're out of the grid
-        }
+        if (nextPosY === 9) break // we're out of the grid
 
         const currCellIndex = getCellIndex(this.grid, nextPosX, nextPosY)
         const currCell = this.grid[currCellIndex]
@@ -124,7 +133,7 @@ function datasFactory() {
       while (searchingAValidValue && searchCount < 50) {
         searchCount++
         // Pick a new random value
-        const newValue = getRandomArrValue(possibleValues)
+        const newValue = getRandomValueInArr(possibleValues)
 
         this.grid[currCellIndex].value = newValue
 
@@ -150,14 +159,16 @@ function datasFactory() {
 
       const quantityOfCellsLeftOnGrid = difficultiesInterface[difficulty]
 
-      const keptPositionsArr = getRandomPositions(quantityOfCellsLeftOnGrid)
+      const keepPositionsArr = getUniqueRandomPositions(
+        quantityOfCellsLeftOnGrid
+      )
 
-      const keptPositionsArrIdentifiers = keptPositionsArr.map((el) => {
+      const keepPositionsArrIdentifiers = keepPositionsArr.map((el) => {
         return `${el.x}${el.y}`
       })
 
       const trimmedGrid = this.grid.map((cell) => {
-        const keepCellValue = evalKeepCell(cell, keptPositionsArrIdentifiers)
+        const keepCellValue = evalKeepCell(cell, keepPositionsArrIdentifiers)
 
         if (keepCellValue) return { ...cell, canChange: false }
         else return { ...cell, value: null }

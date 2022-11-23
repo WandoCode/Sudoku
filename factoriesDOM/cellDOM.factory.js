@@ -59,6 +59,7 @@ function cellDOMFactory(cellData, posX, posY) {
       if (currCellPosX === posX && currCellPosY === posY) {
         const isClicked =
           cell.getAttribute('data-clicked') === 'true' ? true : false
+
         cell.setAttribute('data-clicked', !isClicked)
       } else {
         cell.setAttribute('data-clicked', false)

@@ -29,21 +29,24 @@ function gameManager() {
 
   return {
     gridCurrState: [],
-    precStates: [], //[{ x: null, y: null, value: null }]
+    precStates: [], //[{ x, y, value}]
     gridSolution: [],
     id: null,
+
     launchNewGame: function (difficulty) {
       const datasMaker = datasFactory()
 
       datasMaker.getRandomFullValidGrid()
 
       this.gridSolution = datasMaker.getGrid()
+
       datasMaker.makeGridPlayable(difficulty)
 
       this.gridCurrState = datasMaker.getGrid()
 
       this.saveGame(this.gridCurrState, this.gridSolution)
     },
+
     loadGame: function () {
       this.id = gStore.getSavedId()
 
@@ -54,11 +57,25 @@ function gameManager() {
 
       return true
     },
+
     saveGame: function () {
       this.id = Date.now()
 
       sStore.saveSolution(this.id, this.gridSolution)
       gStore.saveGame(this.id, this.gridCurrState)
+    },
+
+    updateCellData: function (cell, posX, posY, newValue, options) {
+      if (!options.includes('skipSaveForUndo'))
+        this.precStates.push({
+          x: posX,
+          y: posY,
+          value: cell.value,
+        })
+
+      if (options.includes('canNotChange')) cell.canChange = false
+
+      cell.value = newValue
     },
 
     updateCell: function (cellPosX, cellPosY, newValue, options = []) {
@@ -72,18 +89,16 @@ function gameManager() {
           cell.position.y === cellPosYInt &&
           cell.canChange
 
-        if (cellIsValid) {
-          if (!options.includes('skipSaveForUndo'))
-            this.precStates.push({
-              x: cellPosXInt,
-              y: cellPosYInt,
-              value: cell.value,
-            })
+        if (!cellIsValid) return cell
 
-          if (options.includes('canNotChange')) cell.canChange = false
+        this.updateCellData(
+          cell,
+          cellPosXInt,
+          cellPosYInt,
+          newValueInt,
+          options
+        )
 
-          cell.value = newValueInt
-        }
         return cell
       })
 
@@ -127,12 +142,14 @@ function gameManager() {
         ['canNotChange', 'skipSaveForUndo']
       )
     },
+
     showGameErrors: function () {
       let errors = []
 
       this.gridCurrState.forEach((currCell, index) => {
         const solutionValue = parseInt(this.gridSolution[index].value)
         const currValue = parseInt(currCell.value) || null
+
         if (solutionValue !== currValue && currValue !== null)
           errors.push({ x: currCell.position.x, y: currCell.position.y })
       })
