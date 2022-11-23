@@ -1,4 +1,7 @@
 import nodeSelectors from '../utility/nodeSelectors.js'
+import hintSVG from '../assets/hint.svg'
+import checkSVG from '../assets/check.svg'
+import undoSVG from '../assets/undo.svg'
 
 function keyboardDOMFactory(game) {
   const nodes = nodeSelectors()
@@ -12,7 +15,7 @@ function keyboardDOMFactory(game) {
   }
   const createShowErrorsKey = () => {
     const keyboardShowErrors = document.createElement('button')
-    const errorImg = createImg('../assets/check.svg', 'Check for errors')
+    const errorImg = createImg(checkSVG, 'Check for errors')
 
     keyboardShowErrors.appendChild(errorImg)
 
@@ -33,7 +36,7 @@ function keyboardDOMFactory(game) {
 
   const createHintKey = () => {
     const keyboardHint = document.createElement('button')
-    const hintImg = createImg('../assets/hint.svg', 'Tip')
+    const hintImg = createImg(hintSVG, 'Tip')
 
     keyboardHint.appendChild(hintImg)
 
@@ -48,7 +51,7 @@ function keyboardDOMFactory(game) {
   }
   const createUndoKey = () => {
     const keyboardUndo = document.createElement('button')
-    const undoImg = createImg('../assets/undo.svg', 'Undo')
+    const undoImg = createImg(undoSVG, 'Undo')
 
     keyboardUndo.appendChild(undoImg)
 

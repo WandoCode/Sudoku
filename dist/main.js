@@ -86,7 +86,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utility_nodeSelectors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/nodeSelectors.js */ \"./utility/nodeSelectors.js\");\n\nfunction keyboardDOMFactory(game) {\n  var nodes = (0,_utility_nodeSelectors_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n  var createImg = function createImg(path, altText) {\n    var img = document.createElement('img');\n    img.src = path;\n    img.alt = altText;\n    return img;\n  };\n  var createShowErrorsKey = function createShowErrorsKey() {\n    var keyboardShowErrors = document.createElement('button');\n    var errorImg = createImg('../assets/check.svg', 'Check for errors');\n    keyboardShowErrors.appendChild(errorImg);\n    keyboardShowErrors.classList.add('btn', 'btn--secondary', 'keyboard__show-errors');\n    keyboardShowErrors.onclick = handleShowErrors;\n    return keyboardShowErrors;\n  };\n  var handleShowErrors = function handleShowErrors() {\n    game.showGameErrors();\n  };\n  var createHintKey = function createHintKey() {\n    var keyboardHint = document.createElement('button');\n    var hintImg = createImg('../assets/hint.svg', 'Tip');\n    keyboardHint.appendChild(hintImg);\n    keyboardHint.classList.add('btn', 'btn--secondary', 'keyboard__undo');\n    keyboardHint.onclick = handleHint;\n    return keyboardHint;\n  };\n  var handleHint = function handleHint() {\n    game.giveHint();\n  };\n  var createUndoKey = function createUndoKey() {\n    var keyboardUndo = document.createElement('button');\n    var undoImg = createImg('../assets/undo.svg', 'Undo');\n    keyboardUndo.appendChild(undoImg);\n    keyboardUndo.classList.add('btn', 'btn--secondary', 'keyboard__undo');\n    keyboardUndo.onclick = hanleUndo;\n    return keyboardUndo;\n  };\n  var hanleUndo = function hanleUndo() {\n    game.undo();\n  };\n  var createSpecialKeys = function createSpecialKeys() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard__specials');\n    container.appendChild(createUndoKey());\n    container.appendChild(createHintKey());\n    container.appendChild(createShowErrorsKey());\n    return container;\n  };\n  var createKeyValue = function createKeyValue() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard__value');\n    for (var i = 0; i < 10; i++) {\n      var keyboardKey = document.createElement('button');\n      keyboardKey.classList.add('btn', 'btn--key');\n      keyboardKey.value = i === 0 ? null : i;\n      keyboardKey.innerText = i === 0 ? null : i;\n      keyboardKey.onclick = handleClick;\n      container.appendChild(keyboardKey);\n    }\n    return container;\n  };\n  var createKeyboardDOM = function createKeyboardDOM() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard');\n    container.appendChild(createSpecialKeys());\n    container.appendChild(createKeyValue());\n    return container;\n  };\n  var handleClick = function handleClick(e) {\n    var value = e.target.value;\n    var clickedCell = nodes.getClickedCell();\n    if (!clickedCell) return;\n    var clickedCellPosX = clickedCell.getAttribute('data-pos-x');\n    var clickedCellPosY = clickedCell.getAttribute('data-pos-y');\n    var clickedCellCanChange = clickedCell.getAttribute('data-canChange');\n    if (clickedCellCanChange === 'false') return;\n    game.updateCell(clickedCellPosX, clickedCellPosY, value);\n  };\n  return {\n    createKeyboardDOM: createKeyboardDOM\n  };\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (keyboardDOMFactory);\n\n//# sourceURL=webpack://sudoku/./factories/keyboardDOMFactory.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _utility_nodeSelectors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utility/nodeSelectors.js */ \"./utility/nodeSelectors.js\");\n/* harmony import */ var _assets_hint_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/hint.svg */ \"./assets/hint.svg\");\n/* harmony import */ var _assets_check_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/check.svg */ \"./assets/check.svg\");\n/* harmony import */ var _assets_undo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/undo.svg */ \"./assets/undo.svg\");\n\n\n\n\nfunction keyboardDOMFactory(game) {\n  var nodes = (0,_utility_nodeSelectors_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n  var createImg = function createImg(path, altText) {\n    var img = document.createElement('img');\n    img.src = path;\n    img.alt = altText;\n    return img;\n  };\n  var createShowErrorsKey = function createShowErrorsKey() {\n    var keyboardShowErrors = document.createElement('button');\n    var errorImg = createImg(_assets_check_svg__WEBPACK_IMPORTED_MODULE_2__, 'Check for errors');\n    keyboardShowErrors.appendChild(errorImg);\n    keyboardShowErrors.classList.add('btn', 'btn--secondary', 'keyboard__show-errors');\n    keyboardShowErrors.onclick = handleShowErrors;\n    return keyboardShowErrors;\n  };\n  var handleShowErrors = function handleShowErrors() {\n    game.showGameErrors();\n  };\n  var createHintKey = function createHintKey() {\n    var keyboardHint = document.createElement('button');\n    var hintImg = createImg(_assets_hint_svg__WEBPACK_IMPORTED_MODULE_1__, 'Tip');\n    keyboardHint.appendChild(hintImg);\n    keyboardHint.classList.add('btn', 'btn--secondary', 'keyboard__undo');\n    keyboardHint.onclick = handleHint;\n    return keyboardHint;\n  };\n  var handleHint = function handleHint() {\n    game.giveHint();\n  };\n  var createUndoKey = function createUndoKey() {\n    var keyboardUndo = document.createElement('button');\n    var undoImg = createImg(_assets_undo_svg__WEBPACK_IMPORTED_MODULE_3__, 'Undo');\n    keyboardUndo.appendChild(undoImg);\n    keyboardUndo.classList.add('btn', 'btn--secondary', 'keyboard__undo');\n    keyboardUndo.onclick = hanleUndo;\n    return keyboardUndo;\n  };\n  var hanleUndo = function hanleUndo() {\n    game.undo();\n  };\n  var createSpecialKeys = function createSpecialKeys() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard__specials');\n    container.appendChild(createUndoKey());\n    container.appendChild(createHintKey());\n    container.appendChild(createShowErrorsKey());\n    return container;\n  };\n  var createKeyValue = function createKeyValue() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard__value');\n    for (var i = 0; i < 10; i++) {\n      var keyboardKey = document.createElement('button');\n      keyboardKey.classList.add('btn', 'btn--key');\n      keyboardKey.value = i === 0 ? null : i;\n      keyboardKey.innerText = i === 0 ? null : i;\n      keyboardKey.onclick = handleClick;\n      container.appendChild(keyboardKey);\n    }\n    return container;\n  };\n  var createKeyboardDOM = function createKeyboardDOM() {\n    var container = document.createElement('div');\n    container.classList.add('keyboard');\n    container.appendChild(createSpecialKeys());\n    container.appendChild(createKeyValue());\n    return container;\n  };\n  var handleClick = function handleClick(e) {\n    var value = e.target.value;\n    var clickedCell = nodes.getClickedCell();\n    if (!clickedCell) return;\n    var clickedCellPosX = clickedCell.getAttribute('data-pos-x');\n    var clickedCellPosY = clickedCell.getAttribute('data-pos-y');\n    var clickedCellCanChange = clickedCell.getAttribute('data-canChange');\n    if (clickedCellCanChange === 'false') return;\n    game.updateCell(clickedCellPosX, clickedCellPosY, value);\n  };\n  return {\n    createKeyboardDOM: createKeyboardDOM\n  };\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (keyboardDOMFactory);\n\n//# sourceURL=webpack://sudoku/./factories/keyboardDOMFactory.js?");
 
 /***/ }),
 
@@ -168,6 +168,36 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://sudoku/./style/index.css?");
 
+/***/ }),
+
+/***/ "./assets/check.svg":
+/*!**************************!*\
+  !*** ./assets/check.svg ***!
+  \**************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"assets/check.svg\";\n\n//# sourceURL=webpack://sudoku/./assets/check.svg?");
+
+/***/ }),
+
+/***/ "./assets/hint.svg":
+/*!*************************!*\
+  !*** ./assets/hint.svg ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"assets/hint.svg\";\n\n//# sourceURL=webpack://sudoku/./assets/hint.svg?");
+
+/***/ }),
+
+/***/ "./assets/undo.svg":
+/*!*************************!*\
+  !*** ./assets/undo.svg ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"assets/undo.svg\";\n\n//# sourceURL=webpack://sudoku/./assets/undo.svg?");
+
 /***/ })
 
 /******/ 	});
@@ -209,6 +239,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -223,6 +265,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
