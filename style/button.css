@@ -8,10 +8,11 @@
   height: var(--cell-size);
 }
 
-.btn:hover {
-  scale: 115%;
+@media (hover: hover) {
+  .btn:hover {
+    scale: 115%;
+  }
 }
-
 .btn:active {
   translate: 0 -10%;
 }
@@ -29,10 +30,13 @@
 
 .btn--primary:active {
   translate: none;
+  box-shadow: 0 1px 3px 0px var(--clr-main-300);
 }
-.btn--primary:hover {
-  scale: 1;
-  color: var(--clr-main-500);
+@media (hover: hover) {
+  .btn--primary:hover {
+    scale: 1;
+    color: var(--clr-main-500);
+  }
 }
 
 .btn--secondary {
@@ -48,8 +52,11 @@
     padding-block: 0.25rem;
   }
 }
-.btn--secondary:hover {
-  background: none;
+
+@media (hover: hover) {
+  .btn--secondary:hover {
+    background: none;
+  }
 }
 
 .btn--secondary img {

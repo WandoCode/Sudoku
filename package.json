@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
