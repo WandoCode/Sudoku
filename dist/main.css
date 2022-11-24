@@ -124,7 +124,7 @@ table {
 
 @media (max-width: 35em) {
   :root {
-    --cell-size: 35px;
+    --cell-size: 33px;
 
     --fs-200: 0.75rem;
     --fs-300: 1rem;
@@ -481,6 +481,16 @@ footer {
   color: var(--clr-neutral-100);
   font-size: var(--fs-100);
   margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 35em) {
+  footer {
+    margin-top: 2rem;
+  }
 }
 
 /*!*******************************************************************!*\

@@ -39,7 +39,7 @@
 
 @media (max-width: 35em) {
   :root {
-    --cell-size: 35px;
+    --cell-size: 33px;
 
     --fs-200: 0.75rem;
     --fs-300: 1rem;
