@@ -3,7 +3,7 @@
  */
 
 import { describe, expect, test } from 'vitest'
-import rowDOMFactory from '../factories/rowDOMFactory'
+import rowDOMFactory from '../factoriesDOM/rowDOM.factory.js'
 import gridDatas from '../mock/_grid.json'
 
 /* Unit tests */
@@ -37,7 +37,7 @@ describe('When I call "createRow" method with a correct argument', () => {
     const row = rowDOMFactoryInstance.createRow(1)
 
     row.childNodes.forEach((el) => {
-      expect(el.tagName).toEqual('TD')
+      expect(el.tagName).toEqual('DIV')
     })
     expect(row.childNodes.length).toEqual(9)
     expect(row.tagName).toEqual('TR')
@@ -51,7 +51,7 @@ describe('When I call "createRow" method with a correct argument', () => {
     expect(row.tagName).toEqual('TR')
 
     row.childNodes.forEach((el) => {
-      expect(el.tagName).toEqual('TD')
+      expect(el.tagName).toEqual('DIV')
       expect(el.getAttribute('data-pos-y')).toEqual(`${posY}`)
     })
   })
@@ -63,7 +63,7 @@ describe('When I call "createRow" method with a correct argument', () => {
     expect(row.tagName).toEqual('TR')
 
     row.childNodes.forEach((el, index) => {
-      expect(el.tagName).toEqual('TD')
+      expect(el.tagName).toEqual('DIV')
       expect(el.getAttribute('data-pos-x')).toEqual(`${index}`)
     })
   })

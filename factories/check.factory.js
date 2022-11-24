@@ -44,7 +44,7 @@ function checkFactory(gridDatas) {
   const haveOnlyUniqueValues = (arrValues) => {
     let ans = true
     for (let i = 1; i <= 10; i++) {
-      const filteredArr = arrValues.some((val) => {
+      const filteredArr = arrValues.filter((val) => {
         return val === i
       })
 
