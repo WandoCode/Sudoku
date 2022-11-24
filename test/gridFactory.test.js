@@ -43,7 +43,7 @@ describe('When I call a gridDOMFactory instance', () => {
     const gridDOMFactoryInstance = gridDOMFactory(gridDatas)
     gridDOMFactoryInstance.createBoard()
 
-    const table = gridDOMFactoryInstance.getBoard()
+    const table = gridDOMFactoryInstance.board
 
     document.body.appendChild(table)
 
