@@ -2,41 +2,44 @@
  * @vitest-environment jsdom
  */
 
-import { describe, expect, test, beforeAll } from 'vitest'
-import { screen } from '@testing-library/dom'
+import { describe, expect, test, beforeAll, beforeEach } from 'vitest'
 import gridDatas from '../mock/_grid.json'
-import checkFactory from '../factories/checkFactory'
+import checkFactory from '../factories/check.factory.js'
+
+let checkFactoryInstance
+beforeEach(() => {
+  checkFactoryInstance = checkFactory(gridDatas)
+})
 
 /* Unit tests */
 describe('When I start an instance of checkFactory', () => {
   test('Then the "checkRow" should be available', () => {
-    const checkFactoryInstance = checkFactory(gridDatas)
     const methods = Object.getOwnPropertyNames(checkFactoryInstance)
     expect(methods).toContain('checkRow')
   })
 
   test('Then the "checkColumn" should be available', () => {
-    const checkFactoryInstance = checkFactory(gridDatas)
     const methods = Object.getOwnPropertyNames(checkFactoryInstance)
     expect(methods).toContain('checkColumn')
   })
 
   test('Then the "checkSquare" should be available', () => {
-    const checkFactoryInstance = checkFactory(gridDatas)
     const methods = Object.getOwnPropertyNames(checkFactoryInstance)
     expect(methods).toContain('checkSquare')
   })
   test('Then the "getSquarePosition" should be available', () => {
-    const checkFactoryInstance = checkFactory(gridDatas)
     const methods = Object.getOwnPropertyNames(checkFactoryInstance)
     expect(methods).toContain('getSquarePosition')
+  })
+  test('Then the "gridIsValidAtPos" should be available', () => {
+    const methods = Object.getOwnPropertyNames(checkFactoryInstance)
+    expect(methods).toContain('gridIsValidAtPos')
   })
 })
 
 describe('When I call the checkRow method with valid values', () => {
   describe('Given the row is valid', () => {
     test('Then it should be return true', () => {
-      const checkFactoryInstance = checkFactory(gridDatas)
       const rowIsValid = checkFactoryInstance.checkRow(0)
 
       expect(rowIsValid).toBeTruthy()
@@ -62,7 +65,6 @@ describe('When I call the checkRow method with valid values', () => {
 describe('When I call the checkcolumn method with valid values', () => {
   describe('Given the column is valid', () => {
     test('Then it should be return true', () => {
-      const checkFactoryInstance = checkFactory(gridDatas)
       const columnIsValid = checkFactoryInstance.checkColumn(0)
 
       expect(columnIsValid).toBeTruthy()
@@ -111,9 +113,8 @@ describe('When I call the getSquarePosition method with valid argument', () => {
     expect(Array.isArray(squarePositionsA)).toBeTruthy()
     expect(squarePositionsA).toEqual(repA)
   })
-  test('Then it should be return the position of the cell that are in the same square (middle square)', () => {
-    const checkFactoryInstance = checkFactory()
 
+  test('Then it should be return the position of the cell that are in the same square (middle square)', () => {
     // Position of a cell in the middle square
     let posX = 5
     let posY = 3
@@ -139,7 +140,6 @@ describe('When I call the getSquarePosition method with valid argument', () => {
 describe('When I call the checkSquare method with valid values', () => {
   describe('Given the column is valid', () => {
     test('Then it should be return true', () => {
-      const checkFactoryInstance = checkFactory(gridDatas)
       const squareIsValid = checkFactoryInstance.checkSquare(0, 0)
 
       expect(squareIsValid).toBeTruthy()
@@ -158,6 +158,31 @@ describe('When I call the checkSquare method with valid values', () => {
       const squareIsValid = checkFactoryInstance.checkSquare(0, 0)
 
       expect(squareIsValid).toBeFalsy()
+    })
+  })
+})
+
+describe('When I call the gridIsValidAtPos method in a grid', () => {
+  describe('Given the cell value is valid', () => {
+    test('Then it should be return true', () => {
+      const gridIsValid = checkFactoryInstance.gridIsValidAtPos(0, 0)
+
+      expect(gridIsValid).toBeTruthy()
+    })
+  })
+
+  describe('Given the cell value is not valid', () => {
+    const gridDatasCopy = JSON.parse(JSON.stringify(gridDatas))
+
+    // Those 2 positions in gridDatas are the positions (x:0,y:0) and (x:1,y:1)
+    gridDatasCopy[0].value = 1
+    gridDatasCopy[11].value = 1
+
+    test('Then the it should be return false', () => {
+      const checkFactoryInstance = checkFactory(gridDatasCopy)
+      const gridIsValid = checkFactoryInstance.gridIsValidAtPos(0, 0)
+
+      expect(gridIsValid).toBeFalsy()
     })
   })
 })

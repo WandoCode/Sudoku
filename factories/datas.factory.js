@@ -56,11 +56,11 @@ function datasFactory() {
     },
 
     getRandomFullValidGrid: function () {
-      let searchingValidValues = true
+      let allCellsFilled = false
 
-      while (searchingValidValues) {
+      while (!allCellsFilled) {
         this.createEmptyFullGrid()
-        searchingValidValues = this.fillGridWithValidValues()
+        allCellsFilled = this.fillGridWithValidValues()
       }
     },
 
@@ -78,17 +78,17 @@ function datasFactory() {
       let currPosX = 0
       let currPosY = 0
       let currCellIndex = 0
-      let noValidValueFound = true
+      let validValueFound = true
 
       while (currPosX !== null && currPosY !== null) {
-        noValidValueFound = this.fillCellWithValidValue(
+        validValueFound = this.fillCellWithValidValue(
           currCellIndex,
           currPosX,
           currPosY
         )
 
         //No valid value has been found: this grid can't be resolved
-        if (noValidValueFound) {
+        if (!validValueFound) {
           break
         }
 
@@ -101,7 +101,7 @@ function datasFactory() {
       }
 
       // When noValidValueFound=false at this point it means the grid as has been filled
-      return noValidValueFound
+      return validValueFound
     },
 
     getNextEmptyCellPos: function (currPosX, currPosY) {
@@ -125,12 +125,19 @@ function datasFactory() {
       return { x: null, y: null }
     },
 
-    fillCellWithValidValue: function (currCellIndex, currPosX, currPosY) {
-      const possibleValues = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-      let searchingAValidValue = true
+    fillCellWithValidValue: function (
+      currCellIndex,
+      currPosX,
+      currPosY,
+      customPossibleArrValues
+    ) {
+      const possibleValues = customPossibleArrValues || [
+        1, 2, 3, 4, 5, 6, 7, 8, 9,
+      ]
+      let validValueFound = false
       let searchCount = 0
 
-      while (searchingAValidValue && searchCount < 50) {
+      while (!validValueFound && searchCount < 30) {
         searchCount++
         // Pick a new random value
         const newValue = getRandomValueInArr(possibleValues)
@@ -143,18 +150,18 @@ function datasFactory() {
 
         // If she can: add value to the cell and go to next empty cell
         if (gridIsValid) {
-          searchingAValidValue = false
+          validValueFound = true
         } else {
           this.grid[currCellIndex].value = null
         }
       }
 
-      // If searchingAValidValue is true here, it means that a value has not be found after 50 guess => I asume that there is no valid value possible
-      return searchingAValidValue
+      // If validValueFound is false here, it means that a value has not be found after 30 guess => I asume that there is no valid value possible
+      return validValueFound
     },
 
-    makeGridPlayable: function (difficulty) {
-      // {difficulty: # of number that stay on the grid}
+    makeGridPlayable: function (difficulty = 'easy') {
+      // {difficulty: amount of number that stay on the grid}
       const difficultiesInterface = { easy: 25, medium: 21, hard: 17 }
 
       const quantityOfCellsLeftOnGrid = difficultiesInterface[difficulty]
