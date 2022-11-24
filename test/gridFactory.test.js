@@ -2,7 +2,6 @@
  * @vitest-environment jsdom
  */
 import { describe, expect, test } from 'vitest'
-import { screen } from '@testing-library/dom'
 import gridDOMFactory from '../factoriesDOM/gridDOM.factory.js'
 import gridDatas from '../mock/_grid.json'
 
@@ -35,20 +34,5 @@ describe('When I call a gridDOMFactory.createboard', () => {
     })
 
     expect(table.childNodes.length).toEqual(9)
-  })
-})
-
-describe('When I call a gridDOMFactory instance', () => {
-  test('Then it should have a "createBorad" method', () => {
-    const gridDOMFactoryInstance = gridDOMFactory(gridDatas)
-    gridDOMFactoryInstance.createBoard()
-
-    const table = gridDOMFactoryInstance.board
-
-    document.body.appendChild(table)
-
-    const repTable = screen.queryByRole('table')
-
-    expect(repTable).not.toBeNull()
   })
 })

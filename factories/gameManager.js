@@ -49,7 +49,6 @@ function gameManager() {
 
     loadGame: function () {
       this.id = gStore.getSavedId()
-
       if (!this.id) return false
 
       this.gridCurrState = gStore.getGame(this.id)
