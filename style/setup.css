@@ -8,6 +8,7 @@ body {
   background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-600));
   user-select: none;
   display: grid;
+  grid-template-rows: 1fr min-content;
 }
 
 main {
@@ -24,4 +25,12 @@ main {
   main {
     height: 100%;
   }
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--clr-neutral-300);
 }

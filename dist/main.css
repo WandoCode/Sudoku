@@ -108,6 +108,7 @@ table {
 
   --cell-size: 45px;
 
+  --fs-100: 0.6rem;
   --fs-200: 1rem;
   --fs-300: 1.25rem;
   --fs-400: 1.5rem;
@@ -147,6 +148,7 @@ body {
   background: linear-gradient(90deg, var(--clr-main-400), var(--clr-main-600));
   user-select: none;
   display: grid;
+  grid-template-rows: 1fr min-content;
 }
 
 main {
@@ -163,6 +165,14 @@ main {
   main {
     height: 100%;
   }
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--clr-neutral-300);
 }
 
 /*!********************************************************************!*\
@@ -462,6 +472,15 @@ main {
 .select-container #select-difficulty:checked ~ ul {
   display: block;
   z-index: 2;
+}
+
+/*!********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./style/footer.css ***!
+  \********************************************************************/
+footer {
+  color: var(--clr-neutral-100);
+  font-size: var(--fs-100);
+  margin-inline: auto;
 }
 
 /*!*******************************************************************!*\
