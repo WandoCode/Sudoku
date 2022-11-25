@@ -1,6 +1,6 @@
 import nodeSelectors from '../utility/nodeSelectors.js'
 
-function cellDOMFactory(cellData, posX, posY) {
+function cellDOMFactory(cellData) {
   const nodes = nodeSelectors()
 
   const addClassToCellsOnSameRowColumn = (posX, posY) => {
@@ -36,7 +36,10 @@ function cellDOMFactory(cellData, posX, posY) {
       const currCellPosX = cell.getAttribute('data-pos-x')
       const currCellPosY = cell.getAttribute('data-pos-y')
 
-      if (currCellPosX !== posX && currCellPosY !== posY)
+      if (
+        currCellPosX !== cellData.position.x &&
+        currCellPosY !== cellData.position.y
+      )
         return cell.classList.remove('board__cell-in-cross')
     })
   }
@@ -90,8 +93,8 @@ function cellDOMFactory(cellData, posX, posY) {
     },
 
     addAttribute: function () {
-      this.cellDOM.setAttribute('data-pos-x', posX)
-      this.cellDOM.setAttribute('data-pos-y', posY)
+      this.cellDOM.setAttribute('data-pos-x', cellData.position.x)
+      this.cellDOM.setAttribute('data-pos-y', cellData.position.y)
       this.cellDOM.setAttribute('data-canChange', cellData.canChange)
       this.cellDOM.setAttribute('data-clicked', false)
     },
