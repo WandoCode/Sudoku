@@ -29,7 +29,7 @@ function selectFactory(options) {
     const option = document.createElement('li')
 
     option.id = optionName
-    option.innerText = optionName
+    option.innerHTML = optionName
     option.setAttribute('data-value', optionValue)
     option.classList.add('option-select')
 
@@ -89,7 +89,7 @@ function selectFactory(options) {
     const select = nodes.getSelectDifficulty()
     const selectLabel = nodes.getSelect()
 
-    selectLabel.innerText = options[currentValue]
+    selectLabel.innerHTML = options[currentValue]
     select.value = currentValue
 
     updateOptionsClasses(currentValue)
@@ -105,7 +105,7 @@ function selectFactory(options) {
       const selectLabel = getSelectLabelDOM()
       const optionDOM = this.getOptionsDOM(options)
 
-      selectLabel.innerText = options[this.currentValue]
+      selectLabel.innerHTML = options[this.currentValue]
 
       container.appendChild(select)
       container.appendChild(selectLabel)

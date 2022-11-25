@@ -84,7 +84,7 @@ function keyboardDOMFactory(game) {
       const keyboardKey = document.createElement('button')
       keyboardKey.classList.add('btn', 'btn--key')
       keyboardKey.value = i === 0 ? null : i
-      keyboardKey.innerText = i === 0 ? null : i
+      keyboardKey.innerHTML = i === 0 ? null : i
       keyboardKey.onclick = handleClick
 
       container.appendChild(keyboardKey)
@@ -96,6 +96,7 @@ function keyboardDOMFactory(game) {
   const createKeyboardDOM = () => {
     const container = document.createElement('div')
     container.classList.add('keyboard')
+    container.setAttribute('data-testId', 'keyboard')
 
     container.appendChild(createSpecialKeys())
     container.appendChild(createKeyValue())

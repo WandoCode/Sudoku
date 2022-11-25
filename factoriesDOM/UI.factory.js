@@ -24,7 +24,7 @@ function UIFactory(game) {
     const container = nodes.getOptionsContainer()
 
     const btn = document.createElement('button')
-    btn.innerText = 'Nouvelle partie'
+    btn.innerHTML = 'Nouvelle partie'
     btn.classList.add('btn', 'btn--primary')
 
     btn.onclick = handleNewGameBtn
@@ -77,7 +77,7 @@ function UIFactory(game) {
         if (options.includes('canNotChange')) {
           cell.setAttribute('data-canChange', 'false')
         }
-        cell.innerText = value === '0' || isNaN(value) ? '' : value
+        cell.innerHTML = value === '0' || isNaN(value) ? '' : value
         cell.classList.remove('cell--error')
       }
       return

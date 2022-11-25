@@ -8,7 +8,7 @@ function rowDOMFactory(cellDatas) {
     for (let i = 0; i < 9; i++) {
       const cellData = getCellDatas(i, posY)
 
-      const cell = cellDOMFactory(cellData, i, posY)
+      const cell = cellDOMFactory(cellData)
       cell.createCellDOM()
       const cellDOM = cell.cellDOM
 
