@@ -10,6 +10,7 @@
     "start:dev": "webpack serve --open",
     "watch": "webpack --watch",
     "build": "webpack",
+    "deploy": "firebase deploy --only hosting",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
