@@ -11,6 +11,10 @@ const config = {
     assetModuleFilename: 'assets/[name][ext]',
     clean: true,
   },
+  devServer: {
+    static: './dist',
+    hot: true,
+  },
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
